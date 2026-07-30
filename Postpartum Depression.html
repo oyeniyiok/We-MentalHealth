@@ -1,1 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Postpartum Depression | We Mental Health</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --plum: #6a4c93;
+    --plum-deep: #543b78;
+    --plum-light: #8a63b8;
+    --blush: #f4c9d6;
+    --blush-soft: #fbe7ec;
+    --rose-gold: #cf8fa3;
+    --cream: #fff9fb;
+    --ink: #3a2f42;
+    --ink-soft: #6e6178;
+    --sidebar-w: 264px;
+    --alert-bg: #fff3ee;
+    --alert-border: #f3c5ae;
+    --alert-ink: #8a4a2b;
+  }
+  * { box-sizing: border-box; }
+  body{
+    margin: 0;
+    font-family: 'Nunito Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.65;
+  }
+  h1, h2 { font-family: 'Fraunces', serif; font-weight: 600; }
 
+  .sidebar{
+    position: fixed; top: 0; left: 0;
+    width: var(--sidebar-w); height: 100vh;
+    background: linear-gradient(195deg, var(--plum) 0%, var(--plum-light) 100%);
+    color: white;
+    display: flex; flex-direction: column;
+    padding: 34px 22px; z-index: 100;
+  }
+  .brand{ display: flex; align-items: center; gap: 10px; margin-bottom: 46px; padding-left: 4px; }
+  .brand span{ font-family: 'Fraunces', serif; font-size: 1.28rem; font-weight: 600; line-height: 1.15; }
+  .tabs{ list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+  .tabs a{
+    all: unset; display: flex; align-items: center; gap: 12px;
+    width: 100%; padding: 13px 16px; border-radius: 30px;
+    font-size: 0.98rem; font-weight: 700; color: rgba(255,255,255,0.85);
+    cursor: pointer; transition: background 0.2s ease, color 0.2s ease; box-sizing: border-box;
+  }
+  .tabs a svg{ opacity: 0.9; flex-shrink: 0; }
+  .tabs a:hover{ background: rgba(255,255,255,0.12); color: white; }
+  .tabs a.active{ background: var(--blush-soft); color: var(--plum-deep); }
+  .sidebar-footer{ margin-top: auto; padding-left: 4px; font-size: 0.8rem; color: rgba(255,255,255,0.65); }
+
+  main{ margin-left: var(--sidebar-w); min-height: 100vh; }
+
+  .page-hero{
+    position: relative; overflow: hidden;
+    background: radial-gradient(120% 140% at 15% 0%, var(--blush) 0%, var(--cream) 60%);
+    padding: 64px 60px 40px;
+  }
+  .page-hero .blob{
+    position: absolute; top: -80px; right: -60px; width: 280px; height: 280px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.55), rgba(207,143,163,0.35));
+  }
+  .page-hero h1{ position: relative; font-size: clamp(1.9rem, 3.4vw, 2.6rem); color: var(--plum-deep); margin: 0 0 12px; max-width: 22ch; }
+  .page-hero p{ position: relative; max-width: 58ch; font-size: 1.05rem; color: var(--ink-soft); }
+
+  .content{ padding: 10px 60px 90px; max-width: 900px; }
+
+  .safety-banner{
+    background: var(--alert-bg);
+    border: 1px solid var(--alert-border);
+    border-radius: 18px;
+    padding: 22px 26px;
+    margin-bottom: 30px;
+  }
+  .safety-banner h3{ font-family: 'Fraunces', serif; font-size: 1.05rem; color: var(--alert-ink); margin: 0 0 8px; }
+  .safety-banner p{ color: var(--alert-ink); margin: 0; font-size: 0.94rem; }
+  .safety-banner a{ color: var(--alert-ink); font-weight: 800; }
+
+  .info-banner{
+    background: var(--blush-soft);
+    border: 1px solid var(--blush);
+    border-radius: 18px;
+    padding: 20px 26px;
+    margin-bottom: 30px;
+    font-size: 0.92rem;
+    color: var(--plum-deep);
+  }
+
+  .accordion-item{
+    background: white; border-radius: 18px; margin-bottom: 16px;
+    box-shadow: 0 8px 24px rgba(106,76,147,0.07); border: 1px solid #f1e4ea; overflow: hidden;
+  }
+  .accordion-header{
+    all: unset; display: flex; align-items: center; gap: 16px;
+    width: 100%; padding: 24px 28px; cursor: pointer; box-sizing: border-box;
+  }
+  .accordion-header .num{
+    display: inline-flex; align-items: center; justify-content: center;
+    min-width: 34px; height: 34px; padding: 0 10px;
+    background: var(--blush-soft); color: var(--rose-gold);
+    font-weight: 800; font-size: 0.82rem; border-radius: 20px; flex-shrink: 0;
+  }
+  .accordion-header .title{ flex: 1; font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.15rem; color: var(--plum); }
+  .accordion-header .chevron{ flex-shrink: 0; width: 22px; height: 22px; color: var(--rose-gold); transition: transform 0.25s ease; }
+  .accordion-item.open .chevron{ transform: rotate(180deg); }
+
+  .accordion-panel{ max-height: 0; overflow: hidden; transition: max-height 0.32s ease; }
+  .accordion-panel-inner{ padding: 0 28px 26px 78px; }
+  .accordion-panel-inner p{ color: var(--ink-soft); max-width: 66ch; }
+  .accordion-panel-inner ul{ margin-top: 12px; padding-left: 20px; color: var(--ink-soft); max-width: 62ch; }
+  .accordion-panel-inner li{ margin-bottom: 8px; }
+  .accordion-panel-inner a{ color: var(--plum); font-weight: 700; }
+
+  .button{
+    display: inline-block; margin-top: 8px; background: var(--plum); color: white;
+    padding: 13px 28px; text-decoration: none; border-radius: 30px; font-weight: 700;
+    box-shadow: 0 8px 20px rgba(106,76,147,0.28); transition: background 0.2s ease, transform 0.2s ease;
+  }
+  .button:hover{ background: var(--plum-deep); transform: translateY(-1px); }
+
+  footer{ background: var(--plum); color: rgba(255,255,255,0.85); text-align: center; padding: 24px; font-size: 0.9rem; }
+
+  @media (max-width: 880px){
+    .sidebar{ position: static; width: 100%; height: auto; flex-direction: row; align-items: center; padding: 16px 18px; gap: 18px; overflow-x: auto; }
+    .brand{ margin-bottom: 0; }
+    .brand span{ font-size: 1.05rem; }
+    .tabs{ flex-direction: row; gap: 6px; }
+    .tabs a{ padding: 10px 14px; white-space: nowrap; }
+    .sidebar-footer{ display: none; }
+    main{ margin-left: 0; }
+    .page-hero{ padding: 40px 22px 28px; }
+    .content{ padding: 6px 22px 70px; }
+    .accordion-panel-inner{ padding-left: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="brand">
+    <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+      <path d="M15 26C15 26 4 19.5 4 11.8C4 7.7 7.2 5 10.6 5C12.6 5 14.3 6 15 7.6C15.7 6 17.4 5 19.4 5C22.8 5 26 7.7 26 11.8C26 19.5 15 26 15 26Z" fill="white" fill-opacity="0.95"/>
+    </svg>
+    <span>We Mental<br>Health</span>
+  </div>
+  <ul class="tabs">
+    <li><a href="index.html#about"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>About</a></li>
+    <li><a href="index.html#mission"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.4 6.5L21 11l-6.6 2.5L12 20l-2.4-6.5L3 11l6.6-2.5z"/></svg>Mission</a></li>
+    <li><a href="index.html#resources" class="active"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4a1 1 0 0 0-1-1H6.5A2.5 2.5 0 0 0 4 5.5v14z"/><path d="M6.5 17H20v3H6.5a1.5 1.5 0 0 1 0-3z"/></svg>Resources</a></li>
+    <li><a href="index.html#contact"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>Contact</a></li>
+  </ul>
+  <div class="sidebar-footer">Supporting women in sport, one mind at a time.</div>
+</div>
+
+<main>
+  <div class="page-hero">
+    <div class="blob"></div>
+    <h1>Postpartum Depression</h1>
+    <p>What it is, how it differs from the "baby blues," and how new mothers in sport can find real support. Tap a topic to open it.</p>
+  </div>
+
+  <div class="content">
+
+    <div class="safety-banner">
+      <h3>If you're having thoughts of harming yourself or your baby, please get help right now</h3>
+      <p>This is a medical emergency, not something to manage alone. Contact your local emergency services immediately, go to the nearest emergency room, or use the country-specific helplines on our <a href="community.html">Community Support page</a>. These thoughts are a symptom of an illness that can be treated — they do not mean you are a bad mother.</p>
+    </div>
+
+    <div class="info-banner">
+      This page gives general information, not a diagnosis. Postpartum depression is a medical condition — a doctor, midwife, or mental health professional can properly assess and treat it.
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-header" type="button">
+        <span class="num">01</span>
+        <span class="title">What Postpartum Depression Is</span>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="accordion-panel">
+        <div class="accordion-panel-inner">
+          <p>Postpartum depression (PPD) is a real medical condition that can affect mothers after childbirth. It's caused by a mix of hormonal shifts, sleep deprivation, physical recovery, and major life change — not by anything the mother did wrong.</p>
+          <ul>
+            <li>It can start any time in the first year after birth, not just in the first weeks</li>
+            <li>It affects a significant number of new mothers — it is common, not rare or shameful</li>
+            <li>It is treatable, and most mothers who get support recover fully</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-header" type="button">
+        <span class="num">02</span>
+        <span class="title">"Baby Blues" vs. Postpartum Depression</span>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="accordion-panel">
+        <div class="accordion-panel-inner">
+          <p>Many new mothers experience the "baby blues" — mood swings, tearfulness, and anxiety in the first couple of weeks after birth. This is common and usually passes on its own.</p>
+          <ul>
+            <li>Baby blues: typically starts within a few days of birth, and fades within about two weeks</li>
+            <li>Postpartum depression: lasts longer than two weeks, feels more intense, and starts interfering with daily functioning, bonding with the baby, or basic self-care</li>
+            <li>If symptoms last more than two weeks or feel severe at any point, it's time to talk to a doctor — waiting to "see if it passes" isn't necessary</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-header" type="button">
+        <span class="num">03</span>
+        <span class="title">Signs and Symptoms to Watch For</span>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="accordion-panel">
+        <div class="accordion-panel-inner">
+          <p>Postpartum depression can look different from person to person, and doesn't always look like sadness.</p>
+          <ul>
+            <li>Persistent low mood, emptiness, or hopelessness</li>
+            <li>Difficulty bonding with the baby, or feeling numb toward them</li>
+            <li>Withdrawing from family and friends</li>
+            <li>Changes in appetite or sleep beyond what's expected with a newborn</li>
+            <li>Overwhelming guilt, feeling like a failure, or fear of being a "bad mother"</li>
+            <li>Intrusive, frightening thoughts, including about harming yourself or the baby — these are a symptom to report to a doctor immediately, not a truth about who you are</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-header" type="button">
+        <span class="num">04</span>
+        <span class="title">Returning to Sport After Childbirth</span>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="accordion-panel">
+        <div class="accordion-panel-inner">
+          <p>Returning to training and competition postpartum involves both physical recovery and mental health, and pressure to "bounce back" quickly can make postpartum depression harder to recognize or admit to.</p>
+          <ul>
+            <li>Physical clearance from a doctor to return to training doesn't automatically mean you're mentally ready, and both matter</li>
+            <li>It's common for athlete mothers to feel guilt over training time away from the baby, or guilt over not training — both are worth discussing with a professional, not carrying silently</li>
+            <li>A supportive coach or federation should treat postpartum mental health as part of athlete welfare, not a separate, private problem</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-header" type="button">
+        <span class="num">05</span>
+        <span class="title">Risk Factors — and Why It's Not Your Fault</span>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="accordion-panel">
+        <div class="accordion-panel-inner">
+          <p>Certain factors make postpartum depression more likely, but having none of them doesn't mean it can't happen to you, and having several doesn't mean it definitely will.</p>
+          <ul>
+            <li>A personal or family history of depression or anxiety</li>
+            <li>A difficult pregnancy, birth, or lack of support afterward</li>
+            <li>Major life stress, including career pressure or uncertainty about returning to sport</li>
+            <li>Sleep deprivation, which affects mood regulation regardless of any other factor</li>
+          </ul>
+          <p>None of this is caused by weakness, lack of love for the baby, or doing something wrong.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-header" type="button">
+        <span class="num">06</span>
+        <span class="title">Getting Support and Treatment</span>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="accordion-panel">
+        <div class="accordion-panel-inner">
+          <p>Postpartum depression responds well to treatment, and support often works best when it combines a few things at once.</p>
+          <ul>
+            <li>A doctor or midwife can assess symptoms and discuss options, including therapy and, where appropriate, medication</li>
+            <li>Talking therapy (especially approaches designed for postpartum mental health) helps many mothers</li>
+            <li>Practical support — help with the baby, sleep, and daily tasks — is part of treatment too, not separate from it</li>
+            <li>Partners, family, and coaches can help most by believing the mother and helping her get professional support, rather than telling her to "push through"</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-header" type="button">
+        <span class="num">07</span>
+        <span class="title">Where to Get Help</span>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="accordion-panel">
+        <div class="accordion-panel-inner">
+          <p>Reaching out early tends to make the biggest difference in how quickly things improve.</p>
+          <ul>
+            <li>Our <a href="community.html">Community Support page</a> has a confidential way to reach out, plus country-specific helplines</li>
+            <li>Your doctor, midwife, or your baby's pediatrician can all refer you to appropriate care</li>
+            <li>If you're ever having thoughts of harming yourself or your baby, treat that as an emergency — contact local emergency services or go to the nearest emergency room right away</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <a href="index.html" class="button">← Back to Home</a>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 We Mental Health. Supporting Women in Sports, One Mind at a Time.</p>
+  </footer>
+</main>
+
+<script>
+  document.querySelectorAll('.accordion-header').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var item = btn.closest('.accordion-item');
+      var panel = item.querySelector('.accordion-panel');
+      var isOpen = item.classList.contains('open');
+      if (isOpen){
+        panel.style.maxHeight = null;
+        item.classList.remove('open');
+      } else {
+        item.classList.add('open');
+        panel.style.maxHeight = panel.scrollHeight + 'px';
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
