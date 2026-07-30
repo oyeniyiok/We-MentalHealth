@@ -7,7 +7,7 @@ gives athletes real information, a confidential way to reach out about
 what they're going through, and a path to real local help not just
 another static page of advice.
 What's on the site
-Home — About, Mission, Resources, and Contact, all in one page with
+Home, About, Mission, Resources, and Contact, all in one page with
 a left-side tab navigation (no reloads between sections)
 Articles (articles.html) general mental health awareness in
 women's sport
