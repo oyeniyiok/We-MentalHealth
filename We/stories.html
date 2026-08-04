@@ -1,1 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stories from Female Athletes | We Mental Health</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --plum: #6a4c93;
+    --plum-deep: #543b78;
+    --plum-light: #8a63b8;
+    --blush: #f4c9d6;
+    --blush-soft: #fbe7ec;
+    --rose-gold: #cf8fa3;
+    --cream: #fff9fb;
+    --ink: #3a2f42;
+    --ink-soft: #6e6178;
+    --sidebar-w: 264px;
+  }
+  * { box-sizing: border-box; }
+  body{
+    margin: 0;
+    font-family: 'Nunito Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.65;
+  }
+  h1, h2 { font-family: 'Fraunces', serif; font-weight: 600; }
 
+  .sidebar{
+    position: fixed; top: 0; left: 0;
+    width: var(--sidebar-w); height: 100vh;
+    background: linear-gradient(195deg, var(--plum) 0%, var(--plum-light) 100%);
+    color: white;
+    display: flex; flex-direction: column;
+    padding: 34px 22px; z-index: 100;
+  }
+  .brand{ display: flex; align-items: center; gap: 10px; margin-bottom: 46px; padding-left: 4px; }
+  .brand span{ font-family: 'Fraunces', serif; font-size: 1.28rem; font-weight: 600; line-height: 1.15; }
+  .tabs{ list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+  .tabs a{
+    all: unset; display: flex; align-items: center; gap: 12px;
+    width: 100%; padding: 13px 16px; border-radius: 30px;
+    font-size: 0.98rem; font-weight: 700; color: rgba(255,255,255,0.85);
+    cursor: pointer; transition: background 0.2s ease, color 0.2s ease; box-sizing: border-box;
+  }
+  .tabs a svg{ opacity: 0.9; flex-shrink: 0; }
+  .tabs a:hover{ background: rgba(255,255,255,0.12); color: white; }
+  .tabs a.active{ background: var(--blush-soft); color: var(--plum-deep); }
+  .sidebar-footer{ margin-top: auto; padding-left: 4px; font-size: 0.8rem; color: rgba(255,255,255,0.65); }
+
+  main{ margin-left: var(--sidebar-w); min-height: 100vh; }
+
+  .page-hero{
+    position: relative; overflow: hidden;
+    background: radial-gradient(120% 140% at 15% 0%, var(--blush) 0%, var(--cream) 60%);
+    padding: 64px 60px 40px;
+  }
+  .page-hero .blob{
+    position: absolute; top: -80px; right: -60px; width: 280px; height: 280px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.55), rgba(207,143,163,0.35));
+  }
+  .page-hero h1{ position: relative; font-size: clamp(1.9rem, 3.4vw, 2.6rem); color: var(--plum-deep); margin: 0 0 12px; max-width: 22ch; }
+  .page-hero p{ position: relative; max-width: 58ch; font-size: 1.05rem; color: var(--ink-soft); }
+
+  .content{ padding: 10px 60px 90px; max-width: 900px; }
+
+  .card{
+    background: white; border-radius: 20px; padding: 34px clamp(22px, 4vw, 40px);
+    margin-bottom: 24px; box-shadow: 0 10px 30px rgba(106,76,147,0.08); border: 1px solid #f1e4ea;
+  }
+  .card h2{ color: var(--plum); font-size: 1.4rem; margin: 0 0 10px; }
+  .card > p.lead{ color: var(--ink-soft); margin: 0 0 20px; max-width: 66ch; }
+
+  .field-label{ display: block; font-weight: 700; font-size: 0.92rem; color: var(--plum-deep); margin: 20px 0 10px; }
+
+  textarea, input[type="text"]{
+    width: 100%; font-family: 'Nunito Sans', sans-serif; font-size: 0.98rem;
+    padding: 14px 16px; border-radius: 12px; border: 1.5px solid #ecdde5;
+    background: var(--cream); color: var(--ink); resize: vertical;
+  }
+  textarea:focus, input:focus{ outline: none; border-color: var(--rose-gold); }
+
+  select{
+    width: 100%; padding: 12px 14px; border-radius: 10px; border: 1.5px solid #ecdde5;
+    background: var(--cream); font-family: 'Nunito Sans', sans-serif; font-size: 0.95rem; color: var(--ink);
+  }
+
+  .checkbox-row{
+    display: flex; align-items: flex-start; gap: 10px; margin-top: 18px;
+    font-size: 0.92rem; color: var(--ink-soft);
+  }
+  .checkbox-row input{ width: 17px; height: 17px; accent-color: var(--rose-gold); margin-top: 2px; }
+
+  .form-note{ font-size: 0.85rem; color: var(--ink-soft); margin-top: 18px; line-height: 1.55; }
+
+  .button{
+    display: inline-block; margin-top: 22px; background: var(--plum); color: white;
+    padding: 13px 30px; text-decoration: none; border: none; border-radius: 30px;
+    font-weight: 700; font-size: 0.98rem; cursor: pointer;
+    box-shadow: 0 8px 20px rgba(106,76,147,0.28); transition: background 0.2s ease, transform 0.2s ease;
+  }
+  .button:hover{ background: var(--plum-deep); transform: translateY(-1px); }
+  .button.secondary{ background: transparent; color: var(--plum); box-shadow: none; border: 2px solid var(--blush); }
+  .button.secondary:hover{ background: var(--blush-soft); transform: none; }
+
+  .story-card{
+    background: white; border-radius: 18px; padding: 26px 28px; margin-bottom: 16px;
+    box-shadow: 0 8px 24px rgba(106,76,147,0.07); border: 1px solid #f1e4ea;
+  }
+  .story-card .story-name{ font-family: 'Fraunces', serif; font-weight: 600; color: var(--plum); margin-bottom: 8px; }
+  .story-card p{ color: var(--ink-soft); white-space: pre-wrap; margin: 0; }
+  .stories-empty{ color: var(--ink-soft); font-size: 0.95rem; font-style: italic; }
+
+  footer{ background: var(--plum); color: rgba(255,255,255,0.85); text-align: center; padding: 24px; font-size: 0.9rem; }
+
+  @media (max-width: 880px){
+    .sidebar{ position: static; width: 100%; height: auto; flex-direction: row; align-items: center; padding: 16px 18px; gap: 18px; overflow-x: auto; }
+    .brand{ margin-bottom: 0; }
+    .brand span{ font-size: 1.05rem; }
+    .tabs{ flex-direction: row; gap: 6px; }
+    .tabs a{ padding: 10px 14px; white-space: nowrap; }
+    .sidebar-footer{ display: none; }
+    main{ margin-left: 0; }
+    .page-hero{ padding: 40px 22px 28px; }
+    .content{ padding: 6px 22px 70px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="brand">
+    <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+      <path d="M15 26C15 26 4 19.5 4 11.8C4 7.7 7.2 5 10.6 5C12.6 5 14.3 6 15 7.6C15.7 6 17.4 5 19.4 5C22.8 5 26 7.7 26 11.8C26 19.5 15 26 15 26Z" fill="white" fill-opacity="0.95"/>
+    </svg>
+    <span>We Mental<br>Health</span>
+  </div>
+  <ul class="tabs">
+    <li><a href="index.html#about"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>About</a></li>
+    <li><a href="index.html#mission"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.4 6.5L21 11l-6.6 2.5L12 20l-2.4-6.5L3 11l6.6-2.5z"/></svg>Mission</a></li>
+    <li><a href="index.html#resources" class="active"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4a1 1 0 0 0-1-1H6.5A2.5 2.5 0 0 0 4 5.5v14z"/><path d="M6.5 17H20v3H6.5a1.5 1.5 0 0 1 0-3z"/></svg>Resources</a></li>
+    <li><a href="index.html#contact"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>Contact</a></li>
+  </ul>
+  <div class="sidebar-footer">Supporting women in sport, one mind at a time.</div>
+</div>
+
+<main>
+  <div class="page-hero">
+    <div class="blob"></div>
+    <h1>Stories from Female Athletes</h1>
+    <p>Your story might be exactly what another athlete needs to read today. Share as much or as little as you want — publicly, or just with us.</p>
+  </div>
+
+  <div class="content">
+
+    <div class="card">
+      <h2>Share Your Story</h2>
+      <p class="lead">This can be about anything — anxiety, pressure, burnout, recovery, coming back stronger, or just what it's really like being a female athlete. There's no right way to tell it.</p>
+
+      <form id="story-form">
+        <label class="field-label" for="story-text">Your story</label>
+        <textarea id="story-text" rows="8" placeholder="Start wherever feels right..." required></textarea>
+
+        <label class="field-label" for="display-name">What name should we show with it?</label>
+        <input type="text" id="display-name" placeholder="A name, nickname, or leave blank to stay anonymous">
+
+        <div class="checkbox-row">
+          <input type="checkbox" id="anonymous">
+          <label for="anonymous">Keep me completely anonymous (shown as "Anonymous Athlete")</label>
+        </div>
+
+        <div class="checkbox-row">
+          <input type="checkbox" id="consent">
+          <label for="consent">I'm okay with this story possibly being published on this page for others to read. We'll review it first — nothing goes live automatically.</label>
+        </div>
+
+        <label class="field-label" for="country-select">Your country (optional)</label>
+        <select id="country-select">
+          <option value="">Prefer not to say</option>
+          <option value="NG">Nigeria</option>
+          <option value="ES">Spain</option>
+          <option value="GLOBAL">Other</option>
+        </select>
+
+        <p class="form-note">
+          If you don't tick the box above, your story stays private and is only ever read by us for awareness — it will never be published. Either way, this isn't a public post until we've reviewed it.
+        </p>
+        <p id="form-status" class="form-note" style="display:none; font-weight:700;"></p>
+
+        <button type="submit" class="button" id="submit-btn">Share My Story</button>
+      </form>
+    </div>
+
+    <h2 style="margin: 40px 0 4px;">Stories From Our Community</h2>
+    <p style="color: var(--ink-soft); margin: 0 0 20px;">Shared with permission from athletes just like you.</p>
+    <div id="stories-list">
+      <p class="stories-empty">Loading stories...</p>
+    </div>
+
+    <a href="index.html" class="button secondary" style="margin-top: 20px;">← Back to Home</a>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 We Mental Health. Supporting Women in Sports, One Mind at a Time.</p>
+  </footer>
+</main>
+
+<script>
+  function loadStories(){
+    fetch('/api/stories/published')
+      .then(function(r){ return r.json(); })
+      .then(function(data){
+        var list = document.getElementById('stories-list');
+        if (!data.stories || data.stories.length === 0){
+          list.innerHTML = '<p class="stories-empty">No stories published yet — be the first to share yours.</p>';
+          return;
+        }
+        list.innerHTML = data.stories.map(function(s){
+          var name = s.display_name.replace(/</g, '&lt;');
+          var story = s.story.replace(/</g, '&lt;');
+          return '<div class="story-card"><div class="story-name">' + name + '</div><p>' + story + '</p></div>';
+        }).join('');
+      })
+      .catch(function(){
+        document.getElementById('stories-list').innerHTML = '<p class="stories-empty">Could not load stories right now.</p>';
+      });
+  }
+  loadStories();
+
+  document.getElementById('story-form').addEventListener('submit', function(e){
+    e.preventDefault();
+
+    var story = document.getElementById('story-text').value.trim();
+    var name = document.getElementById('display-name').value.trim();
+    var anonymous = document.getElementById('anonymous').checked;
+    var consent = document.getElementById('consent').checked;
+    var country = document.getElementById('country-select').value;
+
+    var status = document.getElementById('form-status');
+    var btn = document.getElementById('submit-btn');
+
+    if (!story){
+      status.style.display = 'block';
+      status.style.color = '#b14f5f';
+      status.textContent = 'Please write something before submitting.';
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+
+    fetch('/api/stories', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ story: story, display_name: name, anonymous: anonymous, consent_to_publish: consent, country: country })
+    })
+      .then(function(r){ return r.json().then(function(body){ return { ok: r.ok, body: body }; }); })
+      .then(function(res){
+        status.style.display = 'block';
+        if (res.ok){
+          status.style.color = '#4a7a5f';
+          status.textContent = 'Thank you for sharing — we\'ve received your story.';
+          document.getElementById('story-form').reset();
+        } else {
+          status.style.color = '#b14f5f';
+          status.textContent = res.body.error || 'Something went wrong. Please try again.';
+        }
+      })
+      .catch(function(){
+        status.style.display = 'block';
+        status.style.color = '#b14f5f';
+        status.textContent = 'Could not reach the server. Please try again.';
+      })
+      .finally(function(){
+        btn.disabled = false;
+        btn.textContent = 'Share My Story';
+      });
+  });
+</script>
+
+</body>
+</html>
