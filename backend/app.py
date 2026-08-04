@@ -109,6 +109,21 @@ def init_db():
         )
         """
     )
+    conn.execute(
+        """
+        CREATE TABLE IF NOT EXISTS stories (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            created_at TEXT NOT NULL,
+            country TEXT,
+            anonymous INTEGER NOT NULL DEFAULT 0,
+            display_name_enc TEXT,
+            story_enc TEXT NOT NULL,
+            consent_to_publish INTEGER NOT NULL DEFAULT 0,
+            published INTEGER NOT NULL DEFAULT 0,
+            reviewed INTEGER NOT NULL DEFAULT 0
+        )
+        """
+    )
     conn.commit()
     conn.close()
 
@@ -180,6 +195,74 @@ def submit_support():
     db.commit()
 
     return jsonify({"status": "received"}), 201
+
+
+# ---------------------------------------------------------------------------
+# stories submission
+# ---------------------------------------------------------------------------
+MAX_STORY_LEN = 8000
+
+@app.post("/api/stories")
+def submit_story():
+    if not encryption.is_configured():
+        return jsonify({"error": "Server is not configured to store data securely yet."}), 503
+
+    ip = request.headers.get("X-Forwarded-For", request.remote_addr or "unknown").split(",")[0].strip()
+    if rate_limited(ip):
+        return jsonify({"error": "Too many submissions. Please try again later."}), 429
+
+    payload = request.get_json(silent=True) or {}
+
+    story = str(payload.get("story") or "").strip()[:MAX_STORY_LEN]
+    display_name = str(payload.get("display_name") or "")[:MAX_NAME_LEN]
+    anonymous = bool(payload.get("anonymous"))
+    consent = bool(payload.get("consent_to_publish"))
+    country = str(payload.get("country") or "")[:5].upper()
+
+    if not story:
+        return jsonify({"error": "Please share your story before submitting."}), 400
+
+    if anonymous:
+        display_name = ""
+
+    db = get_db()
+    db.execute(
+        """
+        INSERT INTO stories (created_at, country, anonymous, display_name_enc, story_enc, consent_to_publish)
+        VALUES (?, ?, ?, ?, ?, ?)
+        """,
+        (
+            datetime.now(timezone.utc).isoformat(),
+            country,
+            1 if anonymous else 0,
+            encryption.encrypt(display_name),
+            encryption.encrypt(story),
+            1 if consent else 0,
+        ),
+    )
+    db.commit()
+
+    return jsonify({"status": "received"}), 201
+
+
+@app.get("/api/stories/published")
+def published_stories():
+    db = get_db()
+    rows = db.execute(
+        "SELECT id, created_at, country, anonymous, display_name_enc, story_enc "
+        "FROM stories WHERE published = 1 ORDER BY id DESC"
+    ).fetchall()
+    out = []
+    for r in rows:
+        name = encryption.decrypt(r["display_name_enc"])
+        out.append({
+            "id": r["id"],
+            "created_at": r["created_at"],
+            "country": r["country"],
+            "display_name": name if (name and not r["anonymous"]) else "Anonymous Athlete",
+            "story": encryption.decrypt(r["story_enc"]),
+        })
+    return jsonify({"stories": out})
 
 
 # ---------------------------------------------------------------------------
@@ -279,7 +362,114 @@ def admin_detail(sub_id):
     return Response(html, mimetype="text/html")
 
 
-@app.get("/api/health")
+@app.get("/admin/stories")
+@require_admin
+def admin_stories_list():
+    db = get_db()
+    rows = db.execute(
+        "SELECT id, created_at, country, anonymous, consent_to_publish, published, reviewed "
+        "FROM stories ORDER BY id DESC"
+    ).fetchall()
+
+    items = "".join(
+        f"""<tr>
+              <td>{r['id']}</td>
+              <td>{r['created_at']}</td>
+              <td>{r['country'] or '-'}</td>
+              <td>{'yes' if r['anonymous'] else 'no'}</td>
+              <td>{'yes' if r['consent_to_publish'] else 'no'}</td>
+              <td>{'✔ live' if r['published'] else ''}</td>
+              <td><a href="/admin/stories/{r['id']}">view / moderate</a></td>
+            </tr>"""
+        for r in rows
+    )
+
+    html = f"""
+    <html><head><title>Stories</title>
+    <style>
+      body {{ font-family: Arial, sans-serif; margin: 30px; color: #333; }}
+      table {{ border-collapse: collapse; width: 100%; }}
+      th, td {{ border: 1px solid #ddd; padding: 8px; text-align: left; font-size: 0.9rem; }}
+      th {{ background: #6a4c93; color: white; }}
+    </style></head>
+    <body>
+      <p><a href="/admin">&larr; Support submissions</a></p>
+      <h2>Athlete Stories ({len(rows)})</h2>
+      <table>
+        <tr><th>ID</th><th>Received</th><th>Country</th><th>Anonymous</th><th>Consented to publish</th><th>Status</th><th></th></tr>
+        {items}
+      </table>
+    </body></html>
+    """
+    return Response(html, mimetype="text/html")
+
+
+@app.get("/admin/stories/<int:story_id>")
+@require_admin
+def admin_story_detail(story_id):
+    db = get_db()
+    row = db.execute("SELECT * FROM stories WHERE id = ?", (story_id,)).fetchone()
+    if not row:
+        return Response("Not found", 404)
+
+    db.execute("UPDATE stories SET reviewed = 1 WHERE id = ?", (story_id,))
+    db.commit()
+
+    name = encryption.decrypt(row["display_name_enc"])
+    story = encryption.decrypt(row["story_enc"])
+    consent = bool(row["consent_to_publish"])
+    published = bool(row["published"])
+
+    publish_button = ""
+    if consent:
+        action = "unpublish" if published else "publish"
+        publish_button = f'<form method="POST" action="/admin/stories/{story_id}/{action}"><button type="submit">{action.capitalize()} this story</button></form>'
+    else:
+        publish_button = "<p><em>This athlete did not consent to publishing — it can only be kept for internal awareness, not shown on the site.</em></p>"
+
+    html = f"""
+    <html><head><title>Story #{story_id}</title>
+    <style>body {{ font-family: Arial, sans-serif; margin: 30px; color: #333; max-width: 700px; }}
+    dt {{ font-weight: bold; margin-top: 14px; }}
+    button {{ margin-top: 16px; padding: 10px 18px; background: #6a4c93; color: white; border: none; border-radius: 6px; cursor: pointer; }}</style></head>
+    <body>
+      <p><a href="/admin/stories">&larr; Back to list</a></p>
+      <h2>Story #{story_id}</h2>
+      <dl>
+        <dt>Received</dt><dd>{row['created_at']}</dd>
+        <dt>Country</dt><dd>{row['country'] or '-'}</dd>
+        <dt>Display name</dt><dd>{name or '(anonymous / not provided)'}</dd>
+        <dt>Consented to publish</dt><dd>{'yes' if consent else 'no'}</dd>
+        <dt>Currently published</dt><dd>{'yes' if published else 'no'}</dd>
+        <dt>Story</dt><dd style="white-space: pre-wrap;">{story}</dd>
+      </dl>
+      {publish_button}
+    </body></html>
+    """
+    return Response(html, mimetype="text/html")
+
+
+@app.post("/admin/stories/<int:story_id>/publish")
+@require_admin
+def admin_story_publish(story_id):
+    db = get_db()
+    row = db.execute("SELECT consent_to_publish FROM stories WHERE id = ?", (story_id,)).fetchone()
+    if row and row["consent_to_publish"]:
+        db.execute("UPDATE stories SET published = 1 WHERE id = ?", (story_id,))
+        db.commit()
+    return Response("", 302, {"Location": f"/admin/stories/{story_id}"})
+
+
+@app.post("/admin/stories/<int:story_id>/unpublish")
+@require_admin
+def admin_story_unpublish(story_id):
+    db = get_db()
+    db.execute("UPDATE stories SET published = 0 WHERE id = ?", (story_id,))
+    db.commit()
+    return Response("", 302, {"Location": f"/admin/stories/{story_id}"})
+
+
+
 def health():
     return jsonify({"status": "ok", "encryption_configured": encryption.is_configured()})
 
@@ -288,4 +478,4 @@ if __name__ == "__main__":
     init_db()
     app.run(host="0.0.0.0", port=5000, debug=False)
 else:
-    init_db() 
+    init_db()
