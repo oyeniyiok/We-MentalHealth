@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -328,6 +327,15 @@
           <label for="anonymous">I'd prefer to stay completely anonymous</label>
         </div>
 
+        <div class="checkbox-row">
+          <input type="checkbox" id="has-evidence">
+          <label for="has-evidence">I have photos, messages, or a recording related to this that I haven't shared yet</label>
+        </div>
+
+        <p class="form-note" id="evidence-note" style="display:none;">
+          Please don't attach or upload any files here — this form only sends text. Keep evidence safely on your own device for now; our <a href="evidence.html">Safely Documenting Abuse</a> guide explains how, and lists organizations equipped to properly receive and handle it, including NAPTIP and accredited Sexual Assault Referral Centres in Nigeria.
+        </p>
+
         <p class="form-note">
           Your message is sent securely and stored encrypted -- only we can read it. We read every message personally, but we are not a crisis service or a licensed clinic, and this is not a substitute for contacting the emergency resources above if you're in immediate danger.
         </p>
@@ -365,10 +373,11 @@
       });
   }
 
-  countrySelect.addEventListener('change', function(){
-    loadResources(countrySelect.value);
-  });
   loadResources(countrySelect.value);
+
+  document.getElementById('has-evidence').addEventListener('change', function(){
+    document.getElementById('evidence-note').style.display = this.checked ? 'block' : 'none';
+  });
 
   document.getElementById('support-form').addEventListener('submit', function(e){
     e.preventDefault();
@@ -379,6 +388,7 @@
     var name = document.getElementById('contact-name').value.trim();
     var contact = document.getElementById('contact-email').value.trim();
     var anonymous = document.getElementById('anonymous').checked;
+    var hasEvidence = document.getElementById('has-evidence').checked;
     var country = countrySelect.value;
 
     var status = document.getElementById('form-status');
@@ -389,7 +399,7 @@
     fetch('/api/support', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ topics: topics, details: details, name: name, contact: contact, anonymous: anonymous, country: country })
+      body: JSON.stringify({ topics: topics, details: details, name: name, contact: contact, anonymous: anonymous, country: country, has_evidence: hasEvidence })
     })
       .then(function(r){ return r.json().then(function(body){ return { ok: r.ok, body: body }; }); })
       .then(function(res){
