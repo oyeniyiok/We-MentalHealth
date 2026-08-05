@@ -102,6 +102,7 @@ def init_db():
             topics TEXT NOT NULL,
             country TEXT,
             anonymous INTEGER NOT NULL DEFAULT 0,
+            has_evidence INTEGER NOT NULL DEFAULT 0,
             details_enc TEXT,
             name_enc TEXT,
             contact_enc TEXT,
@@ -167,6 +168,7 @@ def submit_support():
     name = str(payload.get("name") or "")[:MAX_NAME_LEN]
     contact = str(payload.get("contact") or "")[:MAX_CONTACT_LEN]
     anonymous = bool(payload.get("anonymous"))
+    has_evidence = bool(payload.get("has_evidence"))
     country = str(payload.get("country") or "")[:5].upper()
 
     if not topics and not details:
@@ -179,14 +181,15 @@ def submit_support():
     db = get_db()
     db.execute(
         """
-        INSERT INTO submissions (created_at, topics, country, anonymous, details_enc, name_enc, contact_enc)
-        VALUES (?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO submissions (created_at, topics, country, anonymous, has_evidence, details_enc, name_enc, contact_enc)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
         """,
         (
             datetime.now(timezone.utc).isoformat(),
             json.dumps(topics),
             country,
             1 if anonymous else 0,
+            1 if has_evidence else 0,
             encryption.encrypt(details),
             encryption.encrypt(name),
             encryption.encrypt(contact),
@@ -291,7 +294,7 @@ def require_admin(view):
 def admin_list():
     db = get_db()
     rows = db.execute(
-        "SELECT id, created_at, topics, country, anonymous, reviewed FROM submissions ORDER BY id DESC"
+        "SELECT id, created_at, topics, country, anonymous, has_evidence, reviewed FROM submissions ORDER BY id DESC"
     ).fetchall()
 
     items = "".join(
@@ -301,6 +304,7 @@ def admin_list():
               <td>{', '.join(json.loads(r['topics']))}</td>
               <td>{r['country'] or '-'}</td>
               <td>{'yes' if r['anonymous'] else 'no'}</td>
+              <td>{'📎 yes' if r['has_evidence'] else ''}</td>
               <td>{'✔' if r['reviewed'] else ''}</td>
               <td><a href="/admin/submission/{r['id']}">view</a></td>
             </tr>"""
@@ -318,7 +322,7 @@ def admin_list():
     <body>
       <h2>Support Submissions ({len(rows)})</h2>
       <table>
-        <tr><th>ID</th><th>Received</th><th>Topics</th><th>Country</th><th>Anonymous</th><th>Reviewed</th><th></th></tr>
+        <tr><th>ID</th><th>Received</th><th>Topics</th><th>Country</th><th>Anonymous</th><th>Has Evidence</th><th>Reviewed</th><th></th></tr>
         {items}
       </table>
     </body></html>
@@ -470,6 +474,7 @@ def admin_story_unpublish(story_id):
 
 
 
+@app.get("/api/health")
 def health():
     return jsonify({"status": "ok", "encryption_configured": encryption.is_configured()})
 
