@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Safely Documenting Abuse | We Mental Health</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --plum: #6a4c93;
+    --plum-deep: #543b78;
+    --plum-light: #8a63b8;
+    --blush: #f4c9d6;
+    --blush-soft: #fbe7ec;
+    --rose-gold: #cf8fa3;
+    --cream: #fff9fb;
+    --ink: #3a2f42;
+    --ink-soft: #6e6178;
+    --sidebar-w: 264px;
+    --alert-bg: #fff3ee;
+    --alert-border: #f3c5ae;
+    --alert-ink: #8a4a2b;
+  }
+  * { box-sizing: border-box; }
+  body{
+    margin: 0;
+    font-family: 'Nunito Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.65;
+  }
+  h1, h2 { font-family: 'Fraunces', serif; font-weight: 600; }
+
+  .sidebar{
+    position: fixed; top: 0; left: 0;
+    width: var(--sidebar-w); height: 100vh;
+    background: linear-gradient(195deg, var(--plum) 0%, var(--plum-light) 100%);
+    color: white;
+    display: flex; flex-direction: column;
+    padding: 34px 22px; z-index: 100;
+  }
+  .brand{ display: flex; align-items: center; gap: 10px; margin-bottom: 46px; padding-left: 4px; }
+  .brand span{ font-family: 'Fraunces', serif; font-size: 1.28rem; font-weight: 600; line-height: 1.15; }
+  .tabs{ list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+  .tabs a{
+    all: unset; display: flex; align-items: center; gap: 12px;
+    width: 100%; padding: 13px 16px; border-radius: 30px;
+    font-size: 0.98rem; font-weight: 700; color: rgba(255,255,255,0.85);
+    cursor: pointer; transition: background 0.2s ease, color 0.2s ease; box-sizing: border-box;
+  }
+  .tabs a svg{ opacity: 0.9; flex-shrink: 0; }
+  .tabs a:hover{ background: rgba(255,255,255,0.12); color: white; }
+  .tabs a.active{ background: var(--blush-soft); color: var(--plum-deep); }
+  .sidebar-footer{ margin-top: auto; padding-left: 4px; font-size: 0.8rem; color: rgba(255,255,255,0.65); }
+
+  main{ margin-left: var(--sidebar-w); min-height: 100vh; }
+
+  .page-hero{
+    position: relative; overflow: hidden;
+    background: radial-gradient(120% 140% at 15% 0%, var(--blush) 0%, var(--cream) 60%);
+    padding: 64px 60px 40px;
+  }
+  .page-hero .blob{
+    position: absolute; top: -80px; right: -60px; width: 280px; height: 280px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.55), rgba(207,143,163,0.35));
+  }
+  .page-hero h1{ position: relative; font-size: clamp(1.9rem, 3.4vw, 2.6rem); color: var(--plum-deep); margin: 0 0 12px; max-width: 24ch; }
+  .page-hero p{ position: relative; max-width: 58ch; font-size: 1.05rem; color: var(--ink-soft); }
+
+  .content{ padding: 10px 60px 90px; max-width: 900px; }
+
+  .safety-banner{
+    background: var(--alert-bg); border: 1px solid var(--alert-border); border-radius: 18px;
+    padding: 22px 26px; margin-bottom: 30px;
+  }
+  .safety-banner h3{ font-family: 'Fraunces', serif; font-size: 1.05rem; color: var(--alert-ink); margin: 0 0 8px; }
+  .safety-banner p{ color: var(--alert-ink); margin: 0; font-size: 0.94rem; }
+  .safety-banner a{ color: var(--alert-ink); font-weight: 800; }
+
+  .info-banner{
+    background: var(--blush-soft); border: 1px solid var(--blush); border-radius: 18px;
+    padding: 20px 26px; margin-bottom: 30px; font-size: 0.92rem; color: var(--plum-deep);
+  }
+
+  .accordion-item{
+    background: white; border-radius: 18px; margin-bottom: 16px;
+    box-shadow: 0 8px 24px rgba(106,76,147,0.07); border: 1px solid #f1e4ea; overflow: hidden;
+  }
+  .accordion-header{
+    all: unset; display: flex; align-items: center; gap: 16px;
+    width: 100%; padding: 24px 28px; cursor: pointer; box-sizing: border-box;
+  }
+  .accordion-header .num{
+    display: inline-flex; align-items: center; justify-content: center;
+    min-width: 34px; height: 34px; padding: 0 10px;
+    background: var(--blush-soft); color: var(--rose-gold);
+    font-weight: 800; font-size: 0.82rem; border-radius: 20px; flex-shrink: 0;
+  }
+  .accordion-header .title{ flex: 1; font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.13rem; color: var(--plum); }
+  .accordion-header .chevron{ flex-shrink: 0; width: 22px; height: 22px; color: var(--rose-gold); transition: transform 0.25s ease; }
+  .accordion-item.open .chevron{ transform: rotate(180deg); }
+
+  .accordion-panel{ max-height: 0; overflow: hidden; transition: max-height 0.32s ease; }
+  .accordion-panel-inner{ padding: 0 28px 26px 78px; }
+  .accordion-panel-inner p{ color: var(--ink-soft); max-width: 66ch; }
+  .accordion-panel-inner ul{ margin-top: 12px; padding-left: 20px; color: var(--ink-soft); max-width: 62ch; }
+  .accordion-panel-inner li{ margin-bottom: 8px; }
+  .accordion-panel-inner a{ color: var(--plum); font-weight: 700; }
+
+  .button{
+    display: inline-block; margin-top: 8px; background: var(--plum); color: white;
+    padding: 13px 28px; text-decoration: none; border-radius: 30px; font-weight: 700;
+    box-shadow: 0 8px 20px rgba(106,76,147,0.28); transition: background 0.2s ease, transform 0.2s ease;
+  }
+  .button:hover{ background: var(--plum-deep); transform: translateY(-1px); }
+
+  footer{ background: var(--plum); color: rgba(255,255,255,0.85); text-align: center; padding: 24px; font-size: 0.9rem; }
+
+  @media (max-width: 880px){
+    .sidebar{ position: static; width: 100%; height: auto; flex-direction: row; align-items: center; padding: 16px 18px; gap: 18px; overflow-x: auto; }
+    .brand{ margin-bottom: 0; }
+    .brand span{ font-size: 1.05rem; }
+    .tabs{ flex-direction: row; gap: 6px; }
+    .tabs a{ padding: 10px 14px; white-space: nowrap; }
+    .sidebar-footer{ display: none; }
+    main{ margin-left: 0; }
+    .page-hero{ padding: 40px 22px 28px; }
+    .content{ padding: 6px 22px 70px; }
+    .accordion-panel-inner{ padding-left: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="brand">
+    <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+      <path d="M15 26C15 26 4 19.5 4 11.8C4 7.7 7.2 5 10.6 5C12.6 5 14.3 6 15 7.6C15.7 6 17.4 5 19.4 5C22.8 5 26 7.7 26 11.8C26 19.5 15 26 15 26Z" fill="white" fill-opacity="0.95"/>
+    </svg>
+    <span>We Mental<br>Health</span>
+  </div>
+  <ul class="tabs">
+    <li><a href="index.html#about"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>About</a></li>
+    <li><a href="index.html#mission"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.4 6.5L21 11l-6.6 2.5L12 20l-2.4-6.5L3 11l6.6-2.5z"/></svg>Mission</a></li>
+    <li><a href="index.html#resources" class="active"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4a1 1 0 0 0-1-1H6.5A2.5 2.5 0 0 0 4 5.5v14z"/><path d="M6.5 17H20v3H6.5a1.5 1.5 0 0 1 0-3z"/></svg>Resources</a></li>
+    <li><a href="index.html#contact"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>Contact</a></li>
+  </ul>
+  <div class="sidebar-footer">Supporting women in sport, one mind at a time.</div>
+</div>
+
+<main>
+  <div class="page-hero">
+    <div class="blob"></div>
+    <h1>Safely Documenting Abuse</h1>
+    <p>Practical ways to keep a record of what's happening to you, in case you decide to report it — now or later. Tap a topic to open it.</p>
+  </div>
+
+  <div class="content">
+
+    <div class="safety-banner">
+      <h3>Your safety comes before any evidence</h3>
+      <p>Never put yourself at greater risk to take a photo, get a recording, or save a message. If gathering proof would escalate danger in the moment, leave it and focus on getting somewhere safe. Evidence can wait; your safety can't. If you're in immediate danger, contact local emergency services or use the numbers on our <a href="community.html">Community Support page</a> right now.</p>
+    </div>
+
+    <div class="info-banner">
+      This is general safety information, not legal advice. Rules about recording someone (including audio and video) vary by country and sometimes by region — a lawyer, local women's rights organization, or the police can tell you what's usable and legal where you are.
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-header" type="button">
+        <span class="num">01</span>
+        <span class="title">Why Documentation Matters</span>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="accordion-panel">
+        <div class="accordion-panel-inner">
+          <p>Abuse — whether at home, in a relationship, or from someone in your sport like a coach or senior athlete — often happens with no witnesses, which can make it your word against theirs. A clear, dated record can support you if you ever choose to report it, seek a protective order, or leave the situation.</p>
+          <ul>
+            <li>You don't have to decide right now whether you'll ever use this evidence — keeping it just gives you the option later</li>
+            <li>Documentation is for your protection, not proof you have to justify to anyone before you're ready</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-header" type="button">
+        <span class="num">02</span>
+        <span class="title">Photographing Injuries or Damage</span>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="accordion-panel">
+        <div class="accordion-panel-inner">
+          <p>Photos of injuries are strongest as evidence when they're clear and dated.</p>
+          <ul>
+            <li>Take photos in good light, from more than one angle, including a wider shot that shows context (like the room) and a close-up of the injury</li>
+            <li>If your phone doesn't timestamp photos automatically, hold up something showing the date (like a newspaper or a note with the date written on it) in one photo</li>
+            <li>Bruises can take a day or two to fully show — it's fine to take follow-up photos over the following days</li>
+            <li>A doctor or clinic can also document injuries formally, which can carry extra weight later</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-header" type="button">
+        <span class="num">03</span>
+        <span class="title">Saving Messages and Threats</span>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="accordion-panel">
+        <div class="accordion-panel-inner">
+          <p>Threatening or abusive texts, emails, DMs, or voicemails are often some of the easiest evidence to preserve — as long as you save them before they can be deleted.</p>
+          <ul>
+            <li>Take screenshots that include the date, time, and the other person's name or number</li>
+            <li>Back up screenshots somewhere the person can't access — email them to yourself, or save them to a cloud account they don't know about</li>
+            <li>Don't rely only on the app itself — messages can be deleted, including by the other person</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-header" type="button">
+        <span class="num">04</span>
+        <span class="title">Recording Audio or Video</span>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="accordion-panel">
+        <div class="accordion-panel-inner">
+          <p>Recording an incident as it happens can be powerful evidence, but it also carries real safety and legal considerations.</p>
+          <ul>
+            <li>Only attempt this if it doesn't put you in more danger — a phone visibly recording can sometimes escalate a volatile situation</li>
+            <li>Whether a recording can legally be used often depends on local law — some places require everyone in the recording to know and agree to it, others don't. If you're not sure, keep the recording privately and ask a lawyer or local support organization before deciding how to use it</li>
+            <li>Even where a recording can't be used formally, it can still help you personally remember details clearly and accurately later</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-header" type="button">
+        <span class="num">05</span>
+        <span class="title">Keeping a Written Record</span>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="accordion-panel">
+        <div class="accordion-panel-inner">
+          <p>A simple written log, kept consistently, can be just as valuable as photos or recordings — especially for a pattern of behavior that builds up over time.</p>
+          <ul>
+            <li>For each incident, note the date, time, what happened, and who else was present or nearby</li>
+            <li>Stick to what happened, in plain language — you don't need to interpret or analyze it, just record it</li>
+            <li>Keep this somewhere private and separate from anything the person could access — a notes app protected by its own passcode, a trusted friend, or a printed copy kept somewhere safe</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-header" type="button">
+        <span class="num">06</span>
+        <span class="title">Storing Evidence Safely</span>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="accordion-panel">
+        <div class="accordion-panel-inner">
+          <p>Evidence only helps if the person you're documenting can't find and delete it.</p>
+          <ul>
+            <li>Store copies somewhere outside your usual devices if possible — a cloud account, a trusted friend or family member, or a separate device the other person doesn't know about</li>
+            <li>If the abuser has access to your phone, computer, or accounts, assume anything stored there isn't private</li>
+            <li>Many domestic violence and sexual assault organizations can help you store evidence securely and explain what your local system will actually accept — this is often worth doing even before you're ready to formally report</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-header" type="button">
+        <span class="num">07</span>
+        <span class="title">Who Can Properly Receive Your Evidence</span>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="accordion-panel">
+        <div class="accordion-panel-inner">
+          <p>We don't collect photos, video, or audio on this website — organizations with proper legal authority and secure systems are far better equipped to receive and handle evidence than a website form. In Nigeria, these include:</p>
+          <ul>
+            <li><strong>NAPTIP</strong> (National Agency for the Prohibition of Trafficking in Persons) — handles trafficking and violence against persons cases nationally. Phone: 0703 000 0203, toll-free: 0800-CALL-NAPTIP</li>
+            <li><strong>Mirabel Centre</strong> (Lagos State University Teaching Hospital) — a Sexual Assault Referral Centre offering free medical, forensic, and legal support. Phone: 0815 577 0000</li>
+            <li><strong>WARIF</strong> (Women at Risk International Foundation) — runs a Rape Crisis Centre with trained staff for medical and legal support. Visit warifng.org for current contact details</li>
+            <li><strong>Lagos DSVRT</strong> (Domestic & Sexual Violence Response Team) — free, state-run response line. Phone: 0800 033 3333</li>
+            <li>Your nearest police station can also open a formal report and direct you to the closest accredited Sexual Assault Referral Centre (SARC) in your state</li>
+          </ul>
+          <p>If you're outside Nigeria, a local domestic violence or sexual assault organization, or the police, can tell you exactly how they need evidence submitted where you live.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-header" type="button">
+        <span class="num">08</span>
+        <span class="title">Where to Get Help</span>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="accordion-panel">
+        <div class="accordion-panel-inner">
+          <p>You don't have to figure out what to do with this evidence alone, or all at once.</p>
+          <ul>
+            <li>Our <a href="community.html">Community Support page</a> has a confidential way to reach out, plus real local helplines by country</li>
+            <li>A local domestic violence or sexual assault organization can advise on both safety planning and how evidence is actually used in your country</li>
+            <li>If you are in immediate danger, contact local emergency services first — documentation can always come after your safety</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <a href="index.html" class="button">← Back to Home</a>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 We Mental Health. Supporting Women in Sports, One Mind at a Time.</p>
+  </footer>
+</main>
+
+<script>
+  document.querySelectorAll('.accordion-header').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var item = btn.closest('.accordion-item');
+      var panel = item.querySelector('.accordion-panel');
+      var isOpen = item.classList.contains('open');
+      if (isOpen){
+        panel.style.maxHeight = null;
+        item.classList.remove('open');
+      } else {
+        item.classList.add('open');
+        panel.style.maxHeight = panel.scrollHeight + 'px';
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
