@@ -127,8 +127,14 @@
     position: relative;
     overflow: hidden;
     background: radial-gradient(120% 140% at 15% 0%, var(--blush) 0%, var(--cream) 60%);
-    padding: 86px 60px 70px;
+    padding: 70px 60px 60px;
+    display: flex;
+    align-items: center;
+    gap: 48px;
+    flex-wrap: wrap;
   }
+
+  .hero-text{ flex: 1 1 380px; position: relative; z-index: 1; }
 
   .hero .blob{
     position: absolute;
@@ -153,6 +159,94 @@
     font-size: 1.12rem;
     color: var(--ink-soft);
   }
+
+  /* Photo collage: different sports, different women */
+  .hero-collage{
+    flex: 1 1 340px;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 12px;
+    height: 320px;
+    max-width: 460px;
+  }
+
+  .hero-collage img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 14px 30px rgba(106,76,147,0.22);
+    border: 4px solid white;
+  }
+
+  .hero-collage .tall{ grid-row: span 2; }
+
+  /* Awareness section — symbolic, statistic-driven, no graphic imagery */
+  .awareness{
+    background: linear-gradient(160deg, var(--plum-deep) 0%, var(--plum) 100%);
+    padding: 54px 60px;
+    display: flex;
+    align-items: center;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+
+  .awareness-visual{
+    flex: 0 0 auto;
+    width: 150px;
+    height: 150px;
+  }
+
+  .awareness-text{ flex: 1 1 420px; color: white; }
+
+  .awareness-stat{
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 2.6rem;
+    line-height: 1;
+    margin: 0 0 10px;
+    color: white;
+  }
+
+  .awareness-text p{
+    margin: 0 0 20px;
+    max-width: 60ch;
+    color: rgba(255,255,255,0.88);
+    font-size: 1.02rem;
+  }
+
+  .awareness-text .source{
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.6);
+    margin: -10px 0 20px;
+  }
+
+  .awareness-actions{ display: flex; gap: 14px; flex-wrap: wrap; }
+
+  .awareness-actions a{
+    display: inline-block;
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 0.94rem;
+    text-decoration: none;
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+
+  .awareness-actions .primary{
+    background: white;
+    color: var(--plum-deep);
+  }
+  .awareness-actions .primary:hover{ transform: translateY(-1px); background: var(--blush-soft); }
+
+  .awareness-actions .secondary{
+    background: transparent;
+    color: white;
+    border: 2px solid rgba(255,255,255,0.5);
+  }
+  .awareness-actions .secondary:hover{ transform: translateY(-1px); border-color: white; }
 
   .panels{ padding: 8px 60px 90px; }
 
@@ -277,7 +371,10 @@
     .tabs button{ padding: 10px 14px; white-space: nowrap; }
     .sidebar-footer{ display: none; }
     main{ margin-left: 0; }
-    .hero{ padding: 48px 24px 40px; }
+    .hero{ padding: 48px 24px 40px; flex-direction: column; }
+    .hero-collage{ max-width: 100%; height: 260px; }
+    .awareness{ padding: 40px 24px; flex-direction: column; text-align: center; }
+    .awareness-actions{ justify-content: center; }
     .panels{ padding: 8px 20px 60px; }
   }
 </style>
@@ -320,11 +417,53 @@
 
   <div class="hero">
     <div class="blob"></div>
-    <h1>Your mind deserves the same training as your game.</h1>
-    <p>
-      We Mental Health is a space for female athletes to understand, protect, and talk
-      openly about their mental well-being without losing an ounce of competitive edge.
-    </p>
+    <div class="hero-text">
+      <h1>Your mind deserves the same training as your game.</h1>
+      <p>
+        We Mental Health is a space for female athletes to understand, protect, and talk
+        openly about their mental well-being without losing an ounce of competitive edge.
+      </p>
+    </div>
+    <div class="hero-collage">
+      <img class="tall" src="https://images.unsplash.com/photo-1709403552725-97e0ba206cb8?auto=format&fit=crop&w=600&q=80" alt="Female tennis player in action on the court">
+      <img src="https://images.unsplash.com/photo-1770237710759-82b2962cd4ab?auto=format&fit=crop&w=600&q=80" alt="Women's soccer players on the field">
+      <img src="https://images.unsplash.com/photo-1771257807721-b7da59c6d46d?auto=format&fit=crop&w=600&q=80" alt="Group of young women in basketball uniforms">
+    </div>
+  </div>
+
+  <div class="awareness">
+    <div class="awareness-visual">
+      <svg viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="75" cy="75" r="70" stroke="rgba(255,255,255,0.25)" stroke-width="2" stroke-dasharray="4 6"/>
+        <g fill="#fbe7ec">
+          <circle cx="75" cy="30" r="13"/>
+          <circle cx="118" cy="58" r="13"/>
+          <circle cx="103" cy="105" r="13"/>
+          <circle cx="47" cy="105" r="13"/>
+          <circle cx="32" cy="58" r="13"/>
+        </g>
+        <g stroke="#fbe7ec" stroke-width="2.5" stroke-linecap="round" opacity="0.85">
+          <line x1="75" y1="30" x2="118" y2="58"/>
+          <line x1="118" y1="58" x2="103" y2="105"/>
+          <line x1="103" y1="105" x2="47" y2="105"/>
+          <line x1="47" y1="105" x2="32" y2="58"/>
+          <line x1="32" y1="58" x2="75" y2="30"/>
+        </g>
+      </svg>
+    </div>
+    <div class="awareness-text">
+      <p class="awareness-stat">Almost 1 in 3</p>
+      <p>
+        women worldwide have experienced physical and/or sexual violence in their lifetime —
+        often from someone they know, including within sport. You are not alone, and reaching
+        out is never an overreaction.
+      </p>
+      <p class="source">Source: WHO / UN Women, 2025 global estimates</p>
+      <div class="awareness-actions">
+        <a class="primary" href="community.html">Get Confidential Support</a>
+        <a class="secondary" href="evidence.html">Know Your Options</a>
+      </div>
+    </div>
   </div>
 
   <div class="panels">
