@@ -126,62 +126,51 @@
   .hero{
     position: relative;
     overflow: hidden;
-    background: radial-gradient(120% 140% at 15% 0%, var(--blush) 0%, var(--cream) 60%);
-    padding: 70px 60px 60px;
+    min-height: 480px;
     display: flex;
     align-items: center;
-    gap: 48px;
-    flex-wrap: wrap;
+    padding: 70px 60px;
+    background-image:
+      linear-gradient(100deg, rgba(84,59,120,0.88) 0%, rgba(84,59,120,0.55) 45%, rgba(84,59,120,0.15) 75%),
+      url('https://images.unsplash.com/photo-1770237710759-82b2962cd4ab?auto=format&fit=crop&w=1600&q=80');
+    background-size: cover;
+    background-position: center 30%;
   }
 
-  .hero-text{ flex: 1 1 380px; position: relative; z-index: 1; }
-
-  .hero .blob{
-    position: absolute;
-    top: -80px; right: -60px;
-    width: 320px; height: 320px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.55), rgba(207,143,163,0.35));
-    filter: blur(2px);
-  }
+  .hero-text{ position: relative; z-index: 1; max-width: 640px; }
 
   .hero h1{
-    position: relative;
-    font-size: clamp(2.2rem, 4vw, 3.1rem);
-    color: var(--plum-deep);
+    font-size: clamp(2.4rem, 4.6vw, 3.4rem);
+    color: white;
     margin: 0 0 16px;
-    max-width: 14ch;
+    max-width: 15ch;
+    text-shadow: 0 2px 18px rgba(0,0,0,0.25);
   }
 
   .hero p{
-    position: relative;
     max-width: 52ch;
-    font-size: 1.12rem;
-    color: var(--ink-soft);
+    font-size: 1.14rem;
+    color: rgba(255,255,255,0.92);
+    text-shadow: 0 1px 12px rgba(0,0,0,0.2);
   }
 
-  /* Photo collage: different sports, different women */
-  .hero-collage{
-    flex: 1 1 340px;
-    position: relative;
+  /* Strip of smaller photos beneath the main hero, showing sport variety */
+  .sport-strip{
     display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 12px;
-    height: 320px;
-    max-width: 460px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3px;
+    background: white;
   }
 
-  .hero-collage img{
+  .sport-strip img{
     width: 100%;
-    height: 100%;
+    height: 140px;
     object-fit: cover;
-    border-radius: 20px;
-    box-shadow: 0 14px 30px rgba(106,76,147,0.22);
-    border: 4px solid white;
+    display: block;
+    filter: grayscale(15%);
+    transition: filter 0.25s ease;
   }
-
-  .hero-collage .tall{ grid-row: span 2; }
+  .sport-strip img:hover{ filter: grayscale(0%); }
 
   /* Awareness section — symbolic, statistic-driven, no graphic imagery */
   .awareness{
@@ -371,8 +360,9 @@
     .tabs button{ padding: 10px 14px; white-space: nowrap; }
     .sidebar-footer{ display: none; }
     main{ margin-left: 0; }
-    .hero{ padding: 48px 24px 40px; flex-direction: column; }
-    .hero-collage{ max-width: 100%; height: 260px; }
+    .hero{ padding: 48px 24px; min-height: 380px; background-position: center; }
+    .sport-strip{ grid-template-columns: repeat(2, 1fr); }
+    .sport-strip img{ height: 110px; }
     .awareness{ padding: 40px 24px; flex-direction: column; text-align: center; }
     .awareness-actions{ justify-content: center; }
     .panels{ padding: 8px 20px 60px; }
@@ -416,7 +406,6 @@
 <main>
 
   <div class="hero">
-    <div class="blob"></div>
     <div class="hero-text">
       <h1>Your mind deserves the same training as your game.</h1>
       <p>
@@ -424,11 +413,13 @@
         openly about their mental well-being without losing an ounce of competitive edge.
       </p>
     </div>
-    <div class="hero-collage">
-      <img class="tall" src="https://images.unsplash.com/photo-1709403552725-97e0ba206cb8?auto=format&fit=crop&w=600&q=80" alt="Female tennis player in action on the court">
-      <img src="https://images.unsplash.com/photo-1770237710759-82b2962cd4ab?auto=format&fit=crop&w=600&q=80" alt="Women's soccer players on the field">
-      <img src="https://images.unsplash.com/photo-1771257807721-b7da59c6d46d?auto=format&fit=crop&w=600&q=80" alt="Group of young women in basketball uniforms">
-    </div>
+  </div>
+
+  <div class="sport-strip">
+    <img src="https://images.unsplash.com/photo-1709403552725-97e0ba206cb8?auto=format&fit=crop&w=500&q=80" alt="Female tennis player in action on the court">
+    <img src="https://images.unsplash.com/photo-1771257807721-b7da59c6d46d?auto=format&fit=crop&w=500&q=80" alt="Group of young women in basketball uniforms">
+    <img src="https://images.unsplash.com/photo-1772475625546-d89df18856ff?auto=format&fit=crop&w=500&q=80" alt="Athletes competing in a hurdle race on a track">
+    <img src="https://images.unsplash.com/photo-1604818624842-a4443ab26c85?auto=format&fit=crop&w=500&q=80" alt="Woman cycling outdoors">
   </div>
 
   <div class="awareness">
