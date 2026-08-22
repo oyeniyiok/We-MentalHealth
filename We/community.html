@@ -165,6 +165,17 @@
     border-color: var(--rose-gold);
   }
 
+  select{
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1.5px solid var(--alert-border);
+    background: white;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 0.95rem;
+    color: var(--ink);
+  }
+
   .checkbox-row{
     display: flex;
     align-items: center;
@@ -181,6 +192,7 @@
     margin-top: 18px;
     line-height: 1.55;
   }
+  .form-note a{ color: var(--plum); font-weight: 700; }
 
   .button{
     display: inline-block;
@@ -263,12 +275,192 @@
       <h3>If you are in danger right now, please don't wait on this form</h3>
       <p>This page is not monitored around the clock, and messages sent through it are not a police report or an official complaint. Select your country to see real local resources:</p>
       <label class="field-label" for="country-select" style="color: var(--alert-ink);">Your country</label>
-      <select id="country-select" style="width:100%; padding:12px 14px; border-radius:10px; border:1.5px solid var(--alert-border); background:white; font-family:'Nunito Sans',sans-serif; font-size:0.95rem; margin-bottom:14px;">
-        <option value="NG">Nigeria</option>
-        <option value="ES">Spain</option>
-        <option value="GLOBAL">Other / not listed</option>
+      <select id="country-select">
+        <optgroup label="Countries with local resources on file">
+          <option value="NG">Nigeria</option>
+          <option value="US">United States</option>
+          <option value="GB">United Kingdom</option>
+          <option value="CA">Canada</option>
+          <option value="AU">Australia</option>
+          <option value="ZA">South Africa</option>
+          <option value="KE">Kenya</option>
+          <option value="ES">Spain</option>
+        </optgroup>
+        <optgroup label="All other countries">
+          <option value="GLOBAL">Afghanistan</option>
+          <option value="GLOBAL">Albania</option>
+          <option value="GLOBAL">Algeria</option>
+          <option value="GLOBAL">Andorra</option>
+          <option value="GLOBAL">Angola</option>
+          <option value="GLOBAL">Argentina</option>
+          <option value="GLOBAL">Armenia</option>
+          <option value="GLOBAL">Austria</option>
+          <option value="GLOBAL">Azerbaijan</option>
+          <option value="GLOBAL">Bahamas</option>
+          <option value="GLOBAL">Bahrain</option>
+          <option value="GLOBAL">Bangladesh</option>
+          <option value="GLOBAL">Barbados</option>
+          <option value="GLOBAL">Belarus</option>
+          <option value="GLOBAL">Belgium</option>
+          <option value="GLOBAL">Belize</option>
+          <option value="GLOBAL">Benin</option>
+          <option value="GLOBAL">Bhutan</option>
+          <option value="GLOBAL">Bolivia</option>
+          <option value="GLOBAL">Bosnia and Herzegovina</option>
+          <option value="GLOBAL">Botswana</option>
+          <option value="GLOBAL">Brazil</option>
+          <option value="GLOBAL">Brunei</option>
+          <option value="GLOBAL">Bulgaria</option>
+          <option value="GLOBAL">Burkina Faso</option>
+          <option value="GLOBAL">Burundi</option>
+          <option value="GLOBAL">Cabo Verde</option>
+          <option value="GLOBAL">Cambodia</option>
+          <option value="GLOBAL">Cameroon</option>
+          <option value="GLOBAL">Central African Republic</option>
+          <option value="GLOBAL">Chad</option>
+          <option value="GLOBAL">Chile</option>
+          <option value="GLOBAL">China</option>
+          <option value="GLOBAL">Colombia</option>
+          <option value="GLOBAL">Comoros</option>
+          <option value="GLOBAL">Congo (DRC)</option>
+          <option value="GLOBAL">Congo (Republic)</option>
+          <option value="GLOBAL">Costa Rica</option>
+          <option value="GLOBAL">Croatia</option>
+          <option value="GLOBAL">Cuba</option>
+          <option value="GLOBAL">Cyprus</option>
+          <option value="GLOBAL">Czechia</option>
+          <option value="GLOBAL">Denmark</option>
+          <option value="GLOBAL">Djibouti</option>
+          <option value="GLOBAL">Dominica</option>
+          <option value="GLOBAL">Dominican Republic</option>
+          <option value="GLOBAL">Ecuador</option>
+          <option value="GLOBAL">Egypt</option>
+          <option value="GLOBAL">El Salvador</option>
+          <option value="GLOBAL">Equatorial Guinea</option>
+          <option value="GLOBAL">Eritrea</option>
+          <option value="GLOBAL">Estonia</option>
+          <option value="GLOBAL">Eswatini</option>
+          <option value="GLOBAL">Ethiopia</option>
+          <option value="GLOBAL">Fiji</option>
+          <option value="GLOBAL">Finland</option>
+          <option value="GLOBAL">France</option>
+          <option value="GLOBAL">Gabon</option>
+          <option value="GLOBAL">Gambia</option>
+          <option value="GLOBAL">Georgia</option>
+          <option value="GLOBAL">Germany</option>
+          <option value="GLOBAL">Ghana</option>
+          <option value="GLOBAL">Greece</option>
+          <option value="GLOBAL">Grenada</option>
+          <option value="GLOBAL">Guatemala</option>
+          <option value="GLOBAL">Guinea</option>
+          <option value="GLOBAL">Guinea-Bissau</option>
+          <option value="GLOBAL">Guyana</option>
+          <option value="GLOBAL">Haiti</option>
+          <option value="GLOBAL">Honduras</option>
+          <option value="GLOBAL">Hungary</option>
+          <option value="GLOBAL">Iceland</option>
+          <option value="GLOBAL">India</option>
+          <option value="GLOBAL">Indonesia</option>
+          <option value="GLOBAL">Iran</option>
+          <option value="GLOBAL">Iraq</option>
+          <option value="GLOBAL">Ireland</option>
+          <option value="GLOBAL">Israel</option>
+          <option value="GLOBAL">Italy</option>
+          <option value="GLOBAL">Jamaica</option>
+          <option value="GLOBAL">Japan</option>
+          <option value="GLOBAL">Jordan</option>
+          <option value="GLOBAL">Kazakhstan</option>
+          <option value="GLOBAL">Kiribati</option>
+          <option value="GLOBAL">Kuwait</option>
+          <option value="GLOBAL">Kyrgyzstan</option>
+          <option value="GLOBAL">Laos</option>
+          <option value="GLOBAL">Latvia</option>
+          <option value="GLOBAL">Lebanon</option>
+          <option value="GLOBAL">Lesotho</option>
+          <option value="GLOBAL">Liberia</option>
+          <option value="GLOBAL">Libya</option>
+          <option value="GLOBAL">Liechtenstein</option>
+          <option value="GLOBAL">Lithuania</option>
+          <option value="GLOBAL">Luxembourg</option>
+          <option value="GLOBAL">Madagascar</option>
+          <option value="GLOBAL">Malawi</option>
+          <option value="GLOBAL">Malaysia</option>
+          <option value="GLOBAL">Maldives</option>
+          <option value="GLOBAL">Mali</option>
+          <option value="GLOBAL">Malta</option>
+          <option value="GLOBAL">Mauritania</option>
+          <option value="GLOBAL">Mauritius</option>
+          <option value="GLOBAL">Mexico</option>
+          <option value="GLOBAL">Moldova</option>
+          <option value="GLOBAL">Monaco</option>
+          <option value="GLOBAL">Mongolia</option>
+          <option value="GLOBAL">Montenegro</option>
+          <option value="GLOBAL">Morocco</option>
+          <option value="GLOBAL">Mozambique</option>
+          <option value="GLOBAL">Myanmar</option>
+          <option value="GLOBAL">Namibia</option>
+          <option value="GLOBAL">Nepal</option>
+          <option value="GLOBAL">Netherlands</option>
+          <option value="GLOBAL">New Zealand</option>
+          <option value="GLOBAL">Nicaragua</option>
+          <option value="GLOBAL">Niger</option>
+          <option value="GLOBAL">North Korea</option>
+          <option value="GLOBAL">North Macedonia</option>
+          <option value="GLOBAL">Norway</option>
+          <option value="GLOBAL">Oman</option>
+          <option value="GLOBAL">Pakistan</option>
+          <option value="GLOBAL">Palestine</option>
+          <option value="GLOBAL">Panama</option>
+          <option value="GLOBAL">Papua New Guinea</option>
+          <option value="GLOBAL">Paraguay</option>
+          <option value="GLOBAL">Peru</option>
+          <option value="GLOBAL">Philippines</option>
+          <option value="GLOBAL">Poland</option>
+          <option value="GLOBAL">Portugal</option>
+          <option value="GLOBAL">Qatar</option>
+          <option value="GLOBAL">Romania</option>
+          <option value="GLOBAL">Russia</option>
+          <option value="GLOBAL">Rwanda</option>
+          <option value="GLOBAL">Saudi Arabia</option>
+          <option value="GLOBAL">Senegal</option>
+          <option value="GLOBAL">Serbia</option>
+          <option value="GLOBAL">Sierra Leone</option>
+          <option value="GLOBAL">Singapore</option>
+          <option value="GLOBAL">Slovakia</option>
+          <option value="GLOBAL">Slovenia</option>
+          <option value="GLOBAL">Somalia</option>
+          <option value="GLOBAL">South Korea</option>
+          <option value="GLOBAL">South Sudan</option>
+          <option value="GLOBAL">Sri Lanka</option>
+          <option value="GLOBAL">Sudan</option>
+          <option value="GLOBAL">Suriname</option>
+          <option value="GLOBAL">Sweden</option>
+          <option value="GLOBAL">Switzerland</option>
+          <option value="GLOBAL">Syria</option>
+          <option value="GLOBAL">Taiwan</option>
+          <option value="GLOBAL">Tajikistan</option>
+          <option value="GLOBAL">Tanzania</option>
+          <option value="GLOBAL">Thailand</option>
+          <option value="GLOBAL">Togo</option>
+          <option value="GLOBAL">Trinidad and Tobago</option>
+          <option value="GLOBAL">Tunisia</option>
+          <option value="GLOBAL">Turkey</option>
+          <option value="GLOBAL">Turkmenistan</option>
+          <option value="GLOBAL">Uganda</option>
+          <option value="GLOBAL">Ukraine</option>
+          <option value="GLOBAL">United Arab Emirates</option>
+          <option value="GLOBAL">Uruguay</option>
+          <option value="GLOBAL">Uzbekistan</option>
+          <option value="GLOBAL">Vanuatu</option>
+          <option value="GLOBAL">Venezuela</option>
+          <option value="GLOBAL">Vietnam</option>
+          <option value="GLOBAL">Yemen</option>
+          <option value="GLOBAL">Zambia</option>
+          <option value="GLOBAL">Zimbabwe</option>
+        </optgroup>
+        <option value="GLOBAL">Prefer not to say / not listed</option>
       </select>
-      <ul id="resource-list">
+      <ul id="resource-list" style="margin-top:14px;">
         <li>Loading resources...</li>
       </ul>
     </div>
@@ -277,7 +469,7 @@
     <div class="card">
       <h2>Tell Us What's Affecting You</h2>
       <p class="lead">
-        Choose whatever applies, share as much or as little as you're comfortable with, and let us know how to reach you if you'd like a response. Submitting this opens your email app with your message ready to send to us directly — nothing is posted publicly.
+        Choose whatever applies, share as much or as little as you're comfortable with, and let us know how to reach you if you'd like a response.
       </p>
 
       <form id="support-form">
@@ -358,22 +550,92 @@
   var countrySelect = document.getElementById('country-select');
   var resourceList = document.getElementById('resource-list');
 
-  function loadResources(country){
+  // Baked-in backup copy of resources.json — used if the server call fails,
+  // so a real phone number is always on screen, never just an error message.
+  var RESOURCES_FALLBACK = {
+    "NG": {"resources": [
+      {"name": "Federal Govt Toll-Free Line — Violence Against Women & Girls", "phone": "0800 72 73 2255", "notes": "Free, national"},
+      {"name": "Lagos DSVRT (Domestic & Sexual Violence Response Team)", "phone": "0800 033 3333", "notes": "Free, Lagos State"},
+      {"name": "Mirabel Centre (LASUTH) — Sexual Assault Referral Centre", "phone": "0815 577 0000", "notes": "Lagos, medical + legal support"},
+      {"name": "Cece Yara Foundation — Child Abuse Helpline", "phone": "+234 908 569 2612", "notes": "24/7, specifically for children"},
+      {"name": "Safe Haven Foundation", "phone": "0911 001 9999", "notes": "Confidential, anonymous reporting supported"},
+      {"name": "NAPTIP (trafficking & violence against persons)", "phone": "0703 000 0203", "notes": "Toll-free: 0800-CALL-NAPTIP"}
+    ]},
+    "ES": {"resources": [
+      {"name": "Emergency services (EU-wide)", "phone": "112", "notes": ""},
+      {"name": "ANAR — helpline for minors", "phone": "900 20 20 10", "notes": "Free, confidential, 24/7"},
+      {"name": "016 — gender-based violence line", "phone": "016", "notes": "Free, confidential, doesn't show on phone bill"}
+    ]},
+    "US": {"resources": [
+      {"name": "Emergency services", "phone": "911", "notes": ""},
+      {"name": "National Domestic Violence Hotline", "phone": "1-800-799-7233", "notes": "Text START to 88788, 24/7"},
+      {"name": "RAINN National Sexual Assault Hotline", "phone": "1-800-656-4673", "notes": "Free, confidential, 24/7"},
+      {"name": "Childhelp National Child Abuse Hotline", "phone": "1-800-422-4453", "notes": "24/7, phone/text/chat"}
+    ]},
+    "GB": {"resources": [
+      {"name": "Emergency services", "phone": "999", "notes": ""},
+      {"name": "National Domestic Abuse Helpline", "phone": "0808 2000 247", "notes": "Free, confidential, 24/7"},
+      {"name": "Men's helpline (Respect)", "phone": "0808 801 0327", "notes": "For men experiencing domestic abuse"}
+    ]},
+    "CA": {"resources": [
+      {"name": "Emergency services", "phone": "911", "notes": ""},
+      {"name": "Assaulted Women's Helpline", "phone": "1-866-863-0511", "notes": "24/7, free"},
+      {"name": "Fem'aide (services en français)", "phone": "1-877-336-2433", "notes": ""}
+    ]},
+    "AU": {"resources": [
+      {"name": "Emergency services", "phone": "000", "notes": ""},
+      {"name": "1800RESPECT", "phone": "1800 737 732", "notes": "Free, 24/7"},
+      {"name": "Kids Helpline", "phone": "1800 55 1800", "notes": "Ages 5–25, 24/7"}
+    ]},
+    "ZA": {"resources": [
+      {"name": "Emergency services (SAPS)", "phone": "10111", "notes": ""},
+      {"name": "Gender-Based Violence Command Centre", "phone": "0800 428 428", "notes": "Free, 24/7"},
+      {"name": "National GBV Helpline", "phone": "0800 150 150", "notes": ""}
+    ]},
+    "KE": {"resources": [
+      {"name": "Emergency services", "phone": "999", "notes": ""},
+      {"name": "Healthcare Assistance Kenya — SGBV Helpline", "phone": "1195", "notes": ""}
+    ]},
+    "GLOBAL": {"resources": [
+      {"name": "Child Helpline International directory", "phone": "childhelplineinternational.org", "notes": "Search for your country's child helpline"},
+      {"name": "Find A Helpline directory", "phone": "findahelpline.com", "notes": "Search by country and topic"},
+      {"name": "Local emergency services", "phone": "Varies by country", "notes": "If in immediate danger, contact local police directly"}
+    ]}
+  };
+
+  function renderResources(data, country, label){
+    var heading = (country === 'GLOBAL' && label)
+      ? '<li style="list-style:none; margin-left:-20px; font-weight:700; margin-bottom:6px;">No specific listing yet for ' + label + ' — here\'s where to search:</li>'
+      : '';
+    resourceList.innerHTML = heading + data.resources.map(function(item){
+      return '<li><strong>' + item.name + ':</strong> ' + item.phone +
+             (item.notes ? ' — ' + item.notes : '') + '</li>';
+    }).join('');
+  }
+
+  function loadResources(country, label){
     resourceList.innerHTML = '<li>Loading resources...</li>';
     fetch('/api/resources?country=' + encodeURIComponent(country))
-      .then(function(r){ return r.json(); })
+      .then(function(r){
+        if (!r.ok) throw new Error('bad response');
+        return r.json();
+      })
       .then(function(data){
-        resourceList.innerHTML = data.resources.map(function(item){
-          return '<li><strong>' + item.name + ':</strong> ' + item.phone +
-                 (item.notes ? ' — ' + item.notes : '') + '</li>';
-        }).join('');
+        renderResources(data, country, label);
       })
       .catch(function(){
-        resourceList.innerHTML = '<li>Could not load resources right now. If you are in immediate danger, contact your local emergency services.</li>';
+        // Server call failed — fall back to the numbers baked into this page
+        var fallback = RESOURCES_FALLBACK[country] || RESOURCES_FALLBACK['GLOBAL'];
+        renderResources(fallback, country, label);
       });
   }
 
-  loadResources(countrySelect.value);
+  countrySelect.addEventListener('change', function(){
+    var selectedLabel = countrySelect.options[countrySelect.selectedIndex].text;
+    loadResources(countrySelect.value, selectedLabel);
+  });
+
+  loadResources(countrySelect.value, countrySelect.options[countrySelect.selectedIndex].text);
 
   document.getElementById('has-evidence').addEventListener('change', function(){
     document.getElementById('evidence-note').style.display = this.checked ? 'block' : 'none';
