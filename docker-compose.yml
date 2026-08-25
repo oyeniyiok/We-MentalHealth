@@ -4,7 +4,10 @@ services:
   web:
     build: .
     ports:
-        - "80:80"
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt:ro
     depends_on:
       - backend
     restart: unless-stopped
@@ -16,8 +19,6 @@ services:
     volumes:
       - backend_data:/app/data
     restart: unless-stopped
-    # not published to the internet directly â€” only nginx (the "web"
-    # service) can reach it, via the docker network, at http://backend:5000
 
 volumes:
   backend_data:
