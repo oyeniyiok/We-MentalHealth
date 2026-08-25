@@ -237,7 +237,7 @@
   }
   .awareness-actions .secondary:hover{ transform: translateY(-1px); border-color: white; }
 
-  .panels{ padding: 8px 60px 90px; }
+  .panels{ padding: 8px 60px 90px; scroll-margin-top: 24px; }
 
   .panel{ display: none; animation: fade 0.35s ease; }
   .panel.active{ display: block; }
@@ -535,6 +535,13 @@
       b.classList.toggle('active', b.dataset.tab === name);
     });
     history.replaceState(null, '', '#' + name);
+
+    // Bring the panel content into view — the hero, photo strip, and
+    // awareness banner above push it below the fold otherwise.
+    var panelsSection = document.querySelector('.panels');
+    if (panelsSection){
+      panelsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   }
 
   document.querySelectorAll('.tab-btn').forEach(function(btn){
