@@ -114,6 +114,31 @@
     border-bottom: 1px solid rgba(255,255,255,0.4);
   }
 
+  /* Google Translate widget — styled to sit quietly in the sidebar */
+  #google_translate_element{
+    margin-top: 14px;
+    padding-left: 4px;
+  }
+  #google_translate_element .goog-te-gadget{
+    font-family: 'Nunito Sans', sans-serif !important;
+    font-size: 0.75rem !important;
+    color: rgba(255,255,255,0.6) !important;
+  }
+  #google_translate_element .goog-te-gadget-simple{
+    background: rgba(255,255,255,0.1) !important;
+    border: 1px solid rgba(255,255,255,0.25) !important;
+    border-radius: 20px !important;
+    padding: 6px 12px !important;
+    display: inline-block;
+  }
+  #google_translate_element .goog-te-gadget-simple .goog-te-menu-value span{
+    color: white !important;
+  }
+  #google_translate_element img{ display: none !important; }
+  /* Google injects a top banner iframe when translation is active — hide it, it clashes with the fixed sidebar */
+  .goog-te-banner-frame{ display: none !important; }
+  body{ top: 0 !important; }
+
   /* Mobile top bar */
   .mobile-bar{ display: none; }
 
@@ -401,6 +426,7 @@
   <div class="sidebar-footer">
     Supporting women in sport, one mind at a time.
   </div>
+  <div id="google_translate_element"></div>
 </div>
 
 <main>
@@ -554,6 +580,16 @@
     showTab(initial);
   }
 </script>
+
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement(
+      { pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE },
+      'google_translate_element'
+    );
+  }
+</script>
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 </body>
 </html>
