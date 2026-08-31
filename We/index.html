@@ -114,30 +114,41 @@
     border-bottom: 1px solid rgba(255,255,255,0.4);
   }
 
-  /* Google Translate widget — styled to sit quietly in the sidebar */
-  #google_translate_element{
+  /* Google's own widget UI is completely hidden — it still runs in the
+     background, but we drive it with our own buttons below */
+  #google_translate_element{ display: none !important; }
+  .goog-te-banner-frame{ display: none !important; }
+  body{ top: 0 !important; }
+
+  /* Custom language buttons */
+  .lang-row{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
     margin-top: 14px;
     padding-left: 4px;
   }
-  #google_translate_element .goog-te-gadget{
-    font-family: 'Nunito Sans', sans-serif !important;
-    font-size: 0.75rem !important;
-    color: rgba(255,255,255,0.6) !important;
+  .lang-btn{
+    all: unset;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: rgba(255,255,255,0.75);
+    font-size: 0.72rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
   }
-  #google_translate_element .goog-te-gadget-simple{
-    background: rgba(255,255,255,0.1) !important;
-    border: 1px solid rgba(255,255,255,0.25) !important;
-    border-radius: 20px !important;
-    padding: 6px 12px !important;
-    display: inline-block;
+  .lang-btn:hover{
+    background: rgba(255,255,255,0.2);
+    color: white;
   }
-  #google_translate_element .goog-te-gadget-simple .goog-te-menu-value span{
-    color: white !important;
+  .lang-btn.active{
+    background: var(--blush-soft);
+    color: var(--plum-deep);
+    border-color: var(--blush-soft);
   }
-  #google_translate_element img{ display: none !important; }
-  /* Google injects a top banner iframe when translation is active — hide it, it clashes with the fixed sidebar */
-  .goog-te-banner-frame{ display: none !important; }
-  body{ top: 0 !important; }
 
   /* Mobile top bar */
   .mobile-bar{ display: none; }
@@ -426,6 +437,16 @@
   <div class="sidebar-footer">
     Supporting women in sport, one mind at a time.
   </div>
+  <div class="lang-row" id="lang-row">
+    <button type="button" class="lang-btn active" data-lang="en">English</button>
+    <button type="button" class="lang-btn" data-lang="fr">Français</button>
+    <button type="button" class="lang-btn" data-lang="es">Español</button>
+    <button type="button" class="lang-btn" data-lang="pt">Português</button>
+    <button type="button" class="lang-btn" data-lang="yo">Yorùbá</button>
+    <button type="button" class="lang-btn" data-lang="ha">Hausa</button>
+    <button type="button" class="lang-btn" data-lang="ig">Igbo</button>
+    <button type="button" class="lang-btn" data-lang="sw">Kiswahili</button>
+  </div>
   <div id="google_translate_element"></div>
 </div>
 
@@ -588,6 +609,42 @@
       'google_translate_element'
     );
   }
+
+  function getCookie(name){
+    var match = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+    return match ? decodeURIComponent(match[1]) : null;
+  }
+
+  function setLanguage(lang){
+    var hostname = window.location.hostname;
+    // clear any existing translation cookie first (both host-specific and generic)
+    document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + hostname;
+    if (lang !== 'en'){
+      document.cookie = 'googtrans=/en/' + lang + '; path=/';
+      document.cookie = 'googtrans=/en/' + lang + '; path=/; domain=' + hostname;
+    }
+    location.reload();
+  }
+
+  document.querySelectorAll('.lang-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      setLanguage(btn.dataset.lang);
+    });
+  });
+
+  // Reflect the currently active language (from the cookie) in the button row
+  (function(){
+    var c = getCookie('googtrans');
+    var current = 'en';
+    if (c){
+      var parts = c.split('/');
+      current = parts[parts.length - 1] || 'en';
+    }
+    document.querySelectorAll('.lang-btn').forEach(function(btn){
+      btn.classList.toggle('active', btn.dataset.lang === current);
+    });
+  })();
 </script>
 <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
