@@ -615,7 +615,7 @@
     return match ? decodeURIComponent(match[1]) : null;
   }
 
-  function setLanguage(lang){
+  function setLanguage(lang, isManual){
     var hostname = window.location.hostname;
     // clear any existing translation cookie first (both host-specific and generic)
     document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
@@ -624,14 +624,38 @@
       document.cookie = 'googtrans=/en/' + lang + '; path=/';
       document.cookie = 'googtrans=/en/' + lang + '; path=/; domain=' + hostname;
     }
+    // Once a language has been chosen (by the visitor, or automatically),
+    // remember that a decision was made — this stops auto-detect from
+    // overriding a manual choice on the next page they visit.
+    try { localStorage.setItem('wmh_lang_decided', '1'); } catch (e) {}
     location.reload();
   }
 
   document.querySelectorAll('.lang-btn').forEach(function(btn){
     btn.addEventListener('click', function(){
-      setLanguage(btn.dataset.lang);
+      setLanguage(btn.dataset.lang, true);
     });
   });
+
+  // Auto-detect the visitor's browser language on their very first page —
+  // only runs once per visitor (per browser), and never overrides a
+  // language they've already picked (manually or automatically before).
+  (function autoDetectLanguage(){
+    var alreadyDecided = false;
+    try { alreadyDecided = localStorage.getItem('wmh_lang_decided') === '1'; } catch (e) {}
+    if (alreadyDecided) return;
+
+    var browserLang = (navigator.language || navigator.userLanguage || 'en').split('-')[0].toLowerCase();
+
+    if (browserLang === 'en'){
+      // English visitor — nothing to translate, just remember we checked
+      try { localStorage.setItem('wmh_lang_decided', '1'); } catch (e) {}
+      return;
+    }
+    // Hand off to the same setLanguage function used by the buttons —
+    // this sets the cookie, remembers the decision, and reloads once.
+    setLanguage(browserLang, false);
+  })();
 
   // Reflect the currently active language (from the cookie) in the button row
   (function(){
