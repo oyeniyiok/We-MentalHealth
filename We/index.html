@@ -114,23 +114,6 @@
     border-bottom: 1px solid rgba(255,255,255,0.4);
   }
 
-  /* Google's own widget UI is completely hidden — it still runs in the
-     background, but we drive it with our own buttons below */
-  #google_translate_element{ display: none !important; }
-  .goog-te-banner-frame{ display: none !important; }
-  body{ top: 0 !important; }
-
-  /* Custom language buttons */
-  .lang-row{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 14px;
-    padding-left: 4px;
-  }
-
-  }
-
   /* Mobile top bar */
   .mobile-bar{ display: none; }
 
@@ -189,7 +172,7 @@
   }
   .sport-strip img:hover{ filter: grayscale(0%); }
 
-  /* Awareness section — symbolic, statistic-driven, no graphic imagery */
+  /* Awareness section */
   .awareness{
     background: linear-gradient(160deg, var(--plum-deep) 0%, var(--plum) 100%);
     padding: 54px 60px;
@@ -418,7 +401,6 @@
   <div class="sidebar-footer">
     Supporting women in sport, one mind at a time.
   </div>
- 
 </div>
 
 <main>
@@ -554,8 +536,7 @@
     });
     history.replaceState(null, '', '#' + name);
 
-    // Bring the panel content into view — the hero, photo strip, and
-    // awareness banner above push it below the fold otherwise.
+    // Bring the panel content into view
     var panelsSection = document.querySelector('.panels');
     if (panelsSection){
       panelsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -571,12 +552,6 @@
   if (['about','mission','resources','contact'].indexOf(initial) !== -1){
     showTab(initial);
   }
-</script>
-
-    );
-  }
-
-  })();
 </script>
 
 </body>
