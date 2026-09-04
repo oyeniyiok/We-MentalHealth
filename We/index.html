@@ -401,6 +401,7 @@
   <div class="sidebar-footer">
     Supporting women in sport, one mind at a time.
   </div>
+  <div id="google_translate_element" style="margin-top: 20px; padding-left: 4px;"></div>
 </div>
 
 <main>
@@ -555,4 +556,36 @@
 </script>
 
 </body>
+  <!-- Google Translate Scripts -->
+<script type="text/javascript">
+  // 1. Auto-detect user's browser language and set the translation cookie
+  (function autoDetectLanguage() {
+    var cookieName = 'googtrans';
+    // Check if the user already has a translation cookie
+    var hasCookie = document.cookie.split(';').some(function(item) {
+      return item.trim().startsWith(cookieName + '=');
+    });
+
+    // If no cookie exists, detect browser language
+    if (!hasCookie) {
+      var browserLang = (navigator.language || navigator.userLanguage || 'en').split('-')[0].toLowerCase();
+      
+      // If their language is not English, set the cookie and reload to translate
+      if (browserLang !== 'en') {
+        document.cookie = cookieName + '=/en/' + browserLang + '; path=/';
+        document.cookie = cookieName + '=/en/' + browserLang + '; path=/; domain=' + window.location.hostname;
+        window.location.reload(); 
+      }
+    }
+  })();
+
+  // 2. Initialize the Google Translate Widget
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'en',
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    }, 'google_translate_element');
+  }
+</script>
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </html>
