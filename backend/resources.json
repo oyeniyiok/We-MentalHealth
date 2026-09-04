@@ -68,7 +68,7 @@
       {"name": "Healthcare Assistance Kenya — SGBV Helpline", "phone": "1195", "notes": "Sexual & Gender-Based Violence rapid response"}
     ]
   },
-"FR": {
+  "FR": {
     "label": "France",
     "resources": [
       {"name": "Emergency services (EU-wide)", "phone": "112", "notes": ""},
@@ -343,13 +343,6 @@
       {"name": "Ambulance", "phone": "116", "notes": ""}
     ]
   },
-  "GH": {
-    "label": "Ghana",
-    "resources": [
-      {"name": "Police / Emergency", "phone": "112 / 191", "notes": ""},
-      {"name": "DOVVSU (GBV Support)", "phone": "0800 100 800", "notes": "Domestic Violence and Victims Support Unit toll-free"}
-    ]
-  },
   "GN": {
     "label": "Guinea",
     "resources": [
@@ -361,13 +354,6 @@
     "label": "Guinea-Bissau",
     "resources": [
       {"name": "General Emergency", "phone": "112", "notes": ""}
-    ]
-  },
-  "KE": {
-    "label": "Kenya",
-    "resources": [
-      {"name": "Emergency Services", "phone": "999 / 112", "notes": ""},
-      {"name": "National GBV Helpline", "phone": "1195", "notes": "Toll-free rapid response for SGBV"}
     ]
   },
   "LS": {
@@ -451,14 +437,6 @@
       {"name": "Ambulance", "phone": "15", "notes": ""}
     ]
   },
-  "NG": {
-    "label": "Nigeria",
-    "resources": [
-      {"name": "Federal Govt GBV Toll-Free Line", "phone": "0800 72 73 2255", "notes": "Free, national"},
-      {"name": "Lagos DSVRT", "phone": "0800 033 3333", "notes": "Domestic & Sexual Violence Response Team (Lagos)"},
-      {"name": "General Emergency", "phone": "112", "notes": ""}
-    ]
-  },
   "RW": {
     "label": "Rwanda",
     "resources": [
@@ -499,14 +477,6 @@
       {"name": "Ambulance", "phone": "999", "notes": ""}
     ]
   },
-  "ZA": {
-    "label": "South Africa",
-    "resources": [
-      {"name": "GBV Command Centre", "phone": "0800 428 428", "notes": "Free, 24/7, or dial *120*7867# [1.1.3]"},
-      {"name": "National GBV Helpline", "phone": "0800 150 150", "notes": "For domestic violence"},
-      {"name": "Police Emergency (SAPS)", "phone": "10111", "notes": ""}
-    ]
-  },
   "SS": {
     "label": "South Sudan",
     "resources": [
@@ -540,13 +510,6 @@
       {"name": "Green Line for Violence Against Women", "phone": "1899", "notes": "Toll-free, Ministry of Women and Family"}
     ]
   },
-  "UG": {
-    "label": "Uganda",
-    "resources": [
-      {"name": "Police / Emergency", "phone": "999 / 112", "notes": ""},
-      {"name": "Sauti Helpline for Child Abuse & GBV", "phone": "116", "notes": "Toll-free rapid response"}
-    ]
-  },
   "ZM": {
     "label": "Zambia",
     "resources": [
@@ -560,7 +523,13 @@
       {"name": "General Emergency", "phone": "999", "notes": ""},
       {"name": "Musasa Project GBV Helpline", "phone": "08080074", "notes": "Toll-free support for women facing violence"}
     ]
-  }
+  },
+  "GLOBAL": {
+    "label": "Other / Not listed",
+    "resources": [
+      {"name": "Child Helpline International directory", "phone": "childhelplineinternational.org", "notes": "Search for your country's child helpline"},
+      {"name": "Find A Helpline directory", "phone": "findahelpline.com", "notes": "Search by country and topic (abuse, anxiety, depression, etc.)"},
+      {"name": "Local emergency services", "phone": "Varies by country", "notes": "If you are in immediate danger, contact local police or emergency services directly"}
     ]
   }
 }
