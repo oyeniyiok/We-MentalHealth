@@ -68,12 +68,499 @@
       {"name": "Healthcare Assistance Kenya — SGBV Helpline", "phone": "1195", "notes": "Sexual & Gender-Based Violence rapid response"}
     ]
   },
-  "GLOBAL": {
-    "label": "Other / Not listed",
+"FR": {
+    "label": "France",
     "resources": [
-      {"name": "Child Helpline International directory", "phone": "childhelplineinternational.org", "notes": "Search for your country's child helpline"},
-      {"name": "Find A Helpline directory", "phone": "findahelpline.com", "notes": "Search by country and topic (abuse, anxiety, depression, etc.)"},
-      {"name": "Local emergency services", "phone": "Varies by country", "notes": "If you are in immediate danger, contact local police or emergency services directly"}
+      {"name": "Emergency services (EU-wide)", "phone": "112", "notes": ""},
+      {"name": "Violences Femmes Info", "phone": "3919", "notes": "Free, anonymous, 24/7. Does not show on phone bills"},
+      {"name": "Police / Gendarmerie", "phone": "17", "notes": "Immediate danger response"}
+    ]
+  },
+  "DE": {
+    "label": "Germany",
+    "resources": [
+      {"name": "Emergency services (EU-wide)", "phone": "112", "notes": ""},
+      {"name": "Police", "phone": "110", "notes": ""},
+      {"name": "Hilfetelefon - Gewalt gegen Frauen", "phone": "116 016", "notes": "Violence against women helpline, free, 24/7, multi-lingual"}
+    ]
+  },
+  "IT": {
+    "label": "Italy",
+    "resources": [
+      {"name": "Emergency services (EU-wide)", "phone": "112", "notes": ""},
+      {"name": "Numero Antiviolenza e Stalking", "phone": "1522", "notes": "Anti-violence and stalking helpline, free, 24/7"}
+    ]
+  },
+  "IE": {
+    "label": "Ireland",
+    "resources": [
+      {"name": "Emergency services", "phone": "112 / 999", "notes": ""},
+      {"name": "Women's Aid National Freephone Helpline", "phone": "1800 341 900", "notes": "24/7, free and confidential"}
+    ]
+  },
+  "SE": {
+    "label": "Sweden",
+    "resources": [
+      {"name": "Emergency services (EU-wide)", "phone": "112", "notes": ""},
+      {"name": "Kvinnofridslinjen (National Women's Helpline)", "phone": "020-50 50 50", "notes": "Free, 24/7, does not appear on phone bills"}
+    ]
+  },
+  "AR": {
+    "label": "Argentina",
+    "resources": [
+      {"name": "Emergency services", "phone": "911", "notes": ""},
+      {"name": "Línea 144 (Violencia de Género)", "phone": "144", "notes": "Free, 24/7 nationwide support for gender-based violence"}
+    ]
+  },
+  "BR": {
+    "label": "Brazil",
+    "resources": [
+      {"name": "Polícia Militar (Emergency)", "phone": "190", "notes": "For immediate risk/danger"},
+      {"name": "Central de Atendimento à Mulher", "phone": "180", "notes": "Women's helpline, free, 24/7"},
+      {"name": "SAMU (Ambulance)", "phone": "192", "notes": ""}
+    ]
+  },
+  "CO": {
+    "label": "Colombia",
+    "resources": [
+      {"name": "Emergency services", "phone": "123", "notes": "National emergency line"},
+      {"name": "Línea 155", "phone": "155", "notes": "Guidance for women victims of violence, 24/7"}
+    ]
+  },
+  "MX": {
+    "label": "Mexico",
+    "resources": [
+      {"name": "Emergency services", "phone": "911", "notes": "National emergency line"},
+      {"name": "Red Nacional de Refugios", "phone": "800 108 4053", "notes": "National network of women's shelters, 24/7"}
+    ]
+  },
+  "NZ": {
+    "label": "New Zealand",
+    "resources": [
+      {"name": "Emergency services", "phone": "111", "notes": ""},
+      {"name": "Women's Refuge Crisis Line", "phone": "0800 733 843", "notes": "Free, 24/7 domestic violence support"},
+      {"name": "Shine Domestic Abuse Helpline", "phone": "0800 456 450", "notes": "Free, 24/7 confidential service"}
+    ]
+  },
+  "IN": {
+    "label": "India",
+    "resources": [
+      {"name": "National Emergency Number", "phone": "112", "notes": ""},
+      {"name": "Women Helpline (Domestic Abuse)", "phone": "181", "notes": "National toll-free helpline"},
+      {"name": "Women in Distress", "phone": "1091", "notes": "Police helpline for women"}
+    ]
+  },
+  "PK": {
+    "label": "Pakistan",
+    "resources": [
+      {"name": "Police Emergency", "phone": "15", "notes": ""},
+      {"name": "Ministry of Human Rights Helpline", "phone": "1099", "notes": "For human rights violations and GBV"},
+      {"name": "Punjab Women Helpline", "phone": "1043", "notes": "Toll-free, Punjab province specific"}
+    ]
+  },
+  "PH": {
+    "label": "Philippines",
+    "resources": [
+      {"name": "National Emergency Hotline", "phone": "911", "notes": ""},
+      {"name": "PNP Women and Children Protection Center", "phone": "177", "notes": "Police response for women/child abuse"},
+      {"name": "Actionline Against Human Trafficking & GBV", "phone": "1343", "notes": "24/7 crisis support"}
+    ]
+  },
+  "JP": {
+    "label": "Japan",
+    "resources": [
+      {"name": "Police Emergency", "phone": "110", "notes": ""},
+      {"name": "Ambulance / Fire", "phone": "119", "notes": ""},
+      {"name": "DV Consultation Plus", "phone": "0120-279-889", "notes": "Domestic violence support line, 24/7"},
+      {"name": "Spousal Violence Counseling", "phone": "#8008", "notes": "Connects to nearest local consultation center"}
+    ]
+  },
+  "GH": {
+    "label": "Ghana",
+    "resources": [
+      {"name": "Emergency / Police", "phone": "112 / 191", "notes": ""},
+      {"name": "DOVVSU (Domestic Violence Support)", "phone": "0800 100 800", "notes": "Domestic Violence and Victims Support Unit toll-free"}
+    ]
+  },
+  "UG": {
+    "label": "Uganda",
+    "resources": [
+      {"name": "Police Emergency", "phone": "999 / 112", "notes": ""},
+      {"name": "Sauti 116 Child & GBV Helpline", "phone": "116", "notes": "Toll-free, reports child abuse and GBV"}
+    ]
+  },
+  "DZ": {
+    "label": "Algeria",
+    "resources": [
+      {"name": "Police", "phone": "17", "notes": "National police emergency"},
+      {"name": "Civil Protection / Ambulance", "phone": "14", "notes": ""}
+    ]
+  },
+  "AO": {
+    "label": "Angola",
+    "resources": [
+      {"name": "Police Emergency", "phone": "113", "notes": ""},
+      {"name": "Medical Emergency", "phone": "112", "notes": ""}
+    ]
+  },
+  "BJ": {
+    "label": "Benin",
+    "resources": [
+      {"name": "Police Emergency", "phone": "117", "notes": ""},
+      {"name": "Ambulance / Fire", "phone": "118", "notes": ""}
+    ]
+  },
+  "BW": {
+    "label": "Botswana",
+    "resources": [
+      {"name": "Police Emergency", "phone": "999", "notes": "Toll-free"},
+      {"name": "Ambulance", "phone": "997", "notes": ""}
+    ]
+  },
+  "BF": {
+    "label": "Burkina Faso",
+    "resources": [
+      {"name": "Police", "phone": "17", "notes": ""},
+      {"name": "Ambulance / Fire", "phone": "18", "notes": ""}
+    ]
+  },
+  "BI": {
+    "label": "Burundi",
+    "resources": [
+      {"name": "Police", "phone": "117", "notes": ""},
+      {"name": "Ambulance", "phone": "112", "notes": ""}
+    ]
+  },
+  "CV": {
+    "label": "Cabo Verde",
+    "resources": [
+      {"name": "Police", "phone": "132", "notes": ""},
+      {"name": "Medical Emergency", "phone": "130", "notes": ""}
+    ]
+  },
+  "CM": {
+    "label": "Cameroon",
+    "resources": [
+      {"name": "Police", "phone": "117", "notes": ""},
+      {"name": "Ambulance (SAMU)", "phone": "119", "notes": ""}
+    ]
+  },
+  "CF": {
+    "label": "Central African Republic",
+    "resources": [
+      {"name": "Police", "phone": "117", "notes": ""},
+      {"name": "Ambulance", "phone": "1220", "notes": ""}
+    ]
+  },
+  "TD": {
+    "label": "Chad",
+    "resources": [
+      {"name": "Police", "phone": "17", "notes": ""},
+      {"name": "Ambulance", "phone": "2251-4242", "notes": "Local hospital routing"}
+    ]
+  },
+  "KM": {
+    "label": "Comoros",
+    "resources": [
+      {"name": "Police", "phone": "17", "notes": ""},
+      {"name": "Ambulance", "phone": "18", "notes": ""}
+    ]
+  },
+  "CD": {
+    "label": "Congo (DRC)",
+    "resources": [
+      {"name": "Police Emergency", "phone": "112", "notes": "Or 113 / 114 depending on the network"}
+    ]
+  },
+  "CG": {
+    "label": "Congo (Republic)",
+    "resources": [
+      {"name": "Police", "phone": "117", "notes": ""},
+      {"name": "Ambulance / Fire", "phone": "118", "notes": ""}
+    ]
+  },
+  "CI": {
+    "label": "Côte d'Ivoire",
+    "resources": [
+      {"name": "Police", "phone": "111 / 170", "notes": ""},
+      {"name": "Ambulance (SAMU)", "phone": "185", "notes": ""}
+    ]
+  },
+  "DJ": {
+    "label": "Djibouti",
+    "resources": [
+      {"name": "Police", "phone": "17", "notes": ""},
+      {"name": "Ambulance", "phone": "18", "notes": ""}
+    ]
+  },
+  "EG": {
+    "label": "Egypt",
+    "resources": [
+      {"name": "Police Emergency", "phone": "122", "notes": ""},
+      {"name": "Ambulance", "phone": "123", "notes": ""},
+      {"name": "NCW Women's Complaints Office", "phone": "15115", "notes": "For gender-based violence and legal support"}
+    ]
+  },
+  "GQ": {
+    "label": "Equatorial Guinea",
+    "resources": [
+      {"name": "Police", "phone": "113", "notes": ""},
+      {"name": "Ambulance", "phone": "114", "notes": ""}
+    ]
+  },
+  "ER": {
+    "label": "Eritrea",
+    "resources": [
+      {"name": "Police", "phone": "113", "notes": ""},
+      {"name": "Ambulance", "phone": "114", "notes": ""}
+    ]
+  },
+  "SZ": {
+    "label": "Eswatini",
+    "resources": [
+      {"name": "Police", "phone": "999", "notes": ""},
+      {"name": "SWAGAA GBV Helpline", "phone": "951", "notes": "Swaziland Action Group Against Abuse (Toll-Free)"}
+    ]
+  },
+  "ET": {
+    "label": "Ethiopia",
+    "resources": [
+      {"name": "Police", "phone": "911", "notes": ""},
+      {"name": "Setaweet GBV Helpline", "phone": "7711", "notes": "For women facing violence and abuse"}
+    ]
+  },
+  "GA": {
+    "label": "Gabon",
+    "resources": [
+      {"name": "Police", "phone": "1730", "notes": "Or 1770"},
+      {"name": "Ambulance", "phone": "1300", "notes": ""}
+    ]
+  },
+  "GM": {
+    "label": "Gambia",
+    "resources": [
+      {"name": "Police", "phone": "117", "notes": ""},
+      {"name": "Ambulance", "phone": "116", "notes": ""}
+    ]
+  },
+  "GH": {
+    "label": "Ghana",
+    "resources": [
+      {"name": "Police / Emergency", "phone": "112 / 191", "notes": ""},
+      {"name": "DOVVSU (GBV Support)", "phone": "0800 100 800", "notes": "Domestic Violence and Victims Support Unit toll-free"}
+    ]
+  },
+  "GN": {
+    "label": "Guinea",
+    "resources": [
+      {"name": "Police", "phone": "117", "notes": ""},
+      {"name": "Ambulance", "phone": "18", "notes": ""}
+    ]
+  },
+  "GW": {
+    "label": "Guinea-Bissau",
+    "resources": [
+      {"name": "General Emergency", "phone": "112", "notes": ""}
+    ]
+  },
+  "KE": {
+    "label": "Kenya",
+    "resources": [
+      {"name": "Emergency Services", "phone": "999 / 112", "notes": ""},
+      {"name": "National GBV Helpline", "phone": "1195", "notes": "Toll-free rapid response for SGBV"}
+    ]
+  },
+  "LS": {
+    "label": "Lesotho",
+    "resources": [
+      {"name": "Police Emergency", "phone": "1192", "notes": "Or 112 for general emergencies"}
+    ]
+  },
+  "LR": {
+    "label": "Liberia",
+    "resources": [
+      {"name": "Police Emergency", "phone": "911", "notes": ""}
+    ]
+  },
+  "LY": {
+    "label": "Libya",
+    "resources": [
+      {"name": "Police", "phone": "1515", "notes": ""},
+      {"name": "Ambulance", "phone": "193", "notes": ""}
+    ]
+  },
+  "MG": {
+    "label": "Madagascar",
+    "resources": [
+      {"name": "Police", "phone": "117", "notes": ""},
+      {"name": "Ambulance", "phone": "124", "notes": ""}
+    ]
+  },
+  "MW": {
+    "label": "Malawi",
+    "resources": [
+      {"name": "Police", "phone": "997", "notes": ""},
+      {"name": "Ambulance", "phone": "998", "notes": ""}
+    ]
+  },
+  "ML": {
+    "label": "Mali",
+    "resources": [
+      {"name": "Police", "phone": "17", "notes": ""},
+      {"name": "Ambulance", "phone": "15", "notes": ""}
+    ]
+  },
+  "MR": {
+    "label": "Mauritania",
+    "resources": [
+      {"name": "Police", "phone": "117", "notes": ""},
+      {"name": "Ambulance", "phone": "101", "notes": ""}
+    ]
+  },
+  "MU": {
+    "label": "Mauritius",
+    "resources": [
+      {"name": "Police", "phone": "112 / 999", "notes": ""},
+      {"name": "Family Welfare Helpline", "phone": "139", "notes": "For domestic violence support"}
+    ]
+  },
+  "MA": {
+    "label": "Morocco",
+    "resources": [
+      {"name": "Police", "phone": "19", "notes": "In cities (177 for Gendarmerie in rural areas)"},
+      {"name": "Ambulance", "phone": "15", "notes": ""}
+    ]
+  },
+  "MZ": {
+    "label": "Mozambique",
+    "resources": [
+      {"name": "Police", "phone": "119", "notes": ""},
+      {"name": "Linha Fala Criança (GBV/Abuse)", "phone": "116", "notes": "Toll-free helpline for child abuse and GBV"}
+    ]
+  },
+  "NA": {
+    "label": "Namibia",
+    "resources": [
+      {"name": "Police Emergency", "phone": "10111", "notes": ""}
+    ]
+  },
+  "NE": {
+    "label": "Niger",
+    "resources": [
+      {"name": "Police", "phone": "17", "notes": ""},
+      {"name": "Ambulance", "phone": "15", "notes": ""}
+    ]
+  },
+  "NG": {
+    "label": "Nigeria",
+    "resources": [
+      {"name": "Federal Govt GBV Toll-Free Line", "phone": "0800 72 73 2255", "notes": "Free, national"},
+      {"name": "Lagos DSVRT", "phone": "0800 033 3333", "notes": "Domestic & Sexual Violence Response Team (Lagos)"},
+      {"name": "General Emergency", "phone": "112", "notes": ""}
+    ]
+  },
+  "RW": {
+    "label": "Rwanda",
+    "resources": [
+      {"name": "Police Emergency", "phone": "112", "notes": ""},
+      {"name": "Isange One Stop Centre GBV Line", "phone": "3512", "notes": "Specialized toll-free help for victims of GBV"}
+    ]
+  },
+  "ST": {
+    "label": "Sao Tome and Principe",
+    "resources": [
+      {"name": "General Emergency", "phone": "112", "notes": ""}
+    ]
+  },
+  "SN": {
+    "label": "Senegal",
+    "resources": [
+      {"name": "Police", "phone": "17", "notes": ""},
+      {"name": "Ambulance", "phone": "1515", "notes": ""}
+    ]
+  },
+  "SC": {
+    "label": "Seychelles",
+    "resources": [
+      {"name": "General Emergency", "phone": "999", "notes": ""}
+    ]
+  },
+  "SL": {
+    "label": "Sierra Leone",
+    "resources": [
+      {"name": "General Emergency", "phone": "112", "notes": ""},
+      {"name": "Rainbow Initiative GBV Hotline", "phone": "116", "notes": "For sexual and gender-based violence"}
+    ]
+  },
+  "SO": {
+    "label": "Somalia",
+    "resources": [
+      {"name": "Police Emergency", "phone": "888", "notes": ""},
+      {"name": "Ambulance", "phone": "999", "notes": ""}
+    ]
+  },
+  "ZA": {
+    "label": "South Africa",
+    "resources": [
+      {"name": "GBV Command Centre", "phone": "0800 428 428", "notes": "Free, 24/7, or dial *120*7867# [1.1.3]"},
+      {"name": "National GBV Helpline", "phone": "0800 150 150", "notes": "For domestic violence"},
+      {"name": "Police Emergency (SAPS)", "phone": "10111", "notes": ""}
+    ]
+  },
+  "SS": {
+    "label": "South Sudan",
+    "resources": [
+      {"name": "General Emergency", "phone": "999", "notes": ""}
+    ]
+  },
+  "SD": {
+    "label": "Sudan",
+    "resources": [
+      {"name": "Police Emergency", "phone": "999", "notes": ""}
+    ]
+  },
+  "TZ": {
+    "label": "Tanzania",
+    "resources": [
+      {"name": "Police / Emergency", "phone": "112 / 999", "notes": ""},
+      {"name": "National Child Helpline", "phone": "116", "notes": "Free helpline for violence against women and children"}
+    ]
+  },
+  "TG": {
+    "label": "Togo",
+    "resources": [
+      {"name": "Police", "phone": "117", "notes": ""},
+      {"name": "GBV Hotline (Counselling Center)", "phone": "8200", "notes": "Toll-free line for violence against women"}
+    ]
+  },
+  "TN": {
+    "label": "Tunisia",
+    "resources": [
+      {"name": "Police", "phone": "197", "notes": ""},
+      {"name": "Green Line for Violence Against Women", "phone": "1899", "notes": "Toll-free, Ministry of Women and Family"}
+    ]
+  },
+  "UG": {
+    "label": "Uganda",
+    "resources": [
+      {"name": "Police / Emergency", "phone": "999 / 112", "notes": ""},
+      {"name": "Sauti Helpline for Child Abuse & GBV", "phone": "116", "notes": "Toll-free rapid response"}
+    ]
+  },
+  "ZM": {
+    "label": "Zambia",
+    "resources": [
+      {"name": "General Emergency", "phone": "999", "notes": "Use 112 from a mobile phone"},
+      {"name": "National Child/GBV Helpline", "phone": "116", "notes": "Toll-free reporting line"}
+    ]
+  },
+  "ZW": {
+    "label": "Zimbabwe",
+    "resources": [
+      {"name": "General Emergency", "phone": "999", "notes": ""},
+      {"name": "Musasa Project GBV Helpline", "phone": "08080074", "notes": "Toll-free support for women facing violence"}
+    ]
+  }
     ]
   }
 }
