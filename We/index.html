@@ -114,28 +114,21 @@
     border-bottom: 1px solid rgba(255,255,255,0.4);
   }
 
+  /* Google's own widget UI is completely hidden — it still runs in the
+     background, but we drive it with our own buttons below */
+  #google_translate_element{ display: none !important; }
+  .goog-te-banner-frame{ display: none !important; }
+  body{ top: 0 !important; }
 
+  /* Custom language buttons */
+  .lang-row{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 14px;
+    padding-left: 4px;
   }
-  .lang-btn{
-    all: unset;
-    padding: 5px 10px;
-    border-radius: 20px;
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.25);
-    color: rgba(255,255,255,0.75);
-    font-size: 0.72rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background 0.15s ease, color 0.15s ease;
-  }
-  .lang-btn:hover{
-    background: rgba(255,255,255,0.2);
-    color: white;
-  }
-  .lang-btn.active{
-    background: var(--blush-soft);
-    color: var(--plum-deep);
-    border-color: var(--blush-soft);
+
   }
 
   /* Mobile top bar */
@@ -425,17 +418,7 @@
   <div class="sidebar-footer">
     Supporting women in sport, one mind at a time.
   </div>
-  <div class="lang-row" id="lang-row">
-    <button type="button" class="lang-btn active" data-lang="en">English</button>
-    <button type="button" class="lang-btn" data-lang="fr">Français</button>
-    <button type="button" class="lang-btn" data-lang="es">Español</button>
-    <button type="button" class="lang-btn" data-lang="pt">Português</button>
-    <button type="button" class="lang-btn" data-lang="yo">Yorùbá</button>
-    <button type="button" class="lang-btn" data-lang="ha">Hausa</button>
-    <button type="button" class="lang-btn" data-lang="ig">Igbo</button>
-    <button type="button" class="lang-btn" data-lang="sw">Kiswahili</button>
-  </div>
-  <div id="google_translate_element"></div>
+ 
 </div>
 
 <main>
@@ -590,11 +573,6 @@
   }
 </script>
 
-<script type="text/javascript">
-  function googleTranslateElementInit() {
-    new google.translate.TranslateElement(
-      { pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE },
-      'google_translate_element'
     );
   }
 
