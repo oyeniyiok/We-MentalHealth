@@ -91,6 +91,21 @@ def close_db(exception=None):
         db.close()
 
 
+def _ensure_columns(conn, table, expected_columns):
+    """
+    Self-healing migration: if a table already exists (from before a code
+    update added new fields), add any columns it's missing instead of
+    silently failing on every insert. expected_columns is a dict of
+    {column_name: "SQL TYPE ... DEFAULT ..."}.
+    """
+    existing = {row[1] for row in conn.execute(f"PRAGMA table_info({table})")}
+    for col_name, col_def in expected_columns.items():
+        if col_name not in existing:
+            conn.execute(f"ALTER TABLE {table} ADD COLUMN {col_name} {col_def}")
+            print(f"[migration] added missing column '{col_name}' to '{table}'")
+    conn.commit()
+
+
 def init_db():
     os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
     conn = sqlite3.connect(DB_PATH)
@@ -126,6 +141,19 @@ def init_db():
         """
     )
     conn.commit()
+
+    # Catch up any table that existed before a newer column was added to
+    # the code above — this is what would have prevented today's outage.
+    _ensure_columns(conn, "submissions", {
+        "has_evidence": "INTEGER NOT NULL DEFAULT 0",
+        "reviewed": "INTEGER NOT NULL DEFAULT 0",
+    })
+    _ensure_columns(conn, "stories", {
+        "consent_to_publish": "INTEGER NOT NULL DEFAULT 0",
+        "published": "INTEGER NOT NULL DEFAULT 0",
+        "reviewed": "INTEGER NOT NULL DEFAULT 0",
+    })
+
     conn.close()
 
 
