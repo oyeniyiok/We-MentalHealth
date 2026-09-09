@@ -1,9 +1,24 @@
-backend:
+version: "3.8"
+
+services:
+  web:
+    build: .
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+  backend:
     build: ./backend
     env_file:
       - ./backend/.env
-    ports:
-      - "5000:5000" # <-- Add this (change 5000 to whatever port your backend uses)
     volumes:
       - backend_data:/app/data
     restart: unless-stopped
+
+volumes:
+  backend_data:
