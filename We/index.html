@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -22,6 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site-nav.css">
 <style>
   :root{
     --plum: #6a4c93;
@@ -48,132 +49,6 @@
   h1, h2, h3 { font-family: 'Fraunces', serif; font-weight: 600; }
 
   a { color: inherit; }
-
-  /* ---------- Top bar ---------- */
-  .topbar{
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    height: 76px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 28px;
-    background: rgba(84,59,120,0.55);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    z-index: 500;
-    transition: background 0.25s ease;
-  }
-  .topbar.solid{
-    background: var(--plum-deep);
-  }
-
-  .brand{
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: white;
-    text-decoration: none;
-  }
-  .brand span{
-    font-family: 'Fraunces', serif;
-    font-size: 1.2rem;
-    font-weight: 600;
-    line-height: 1.15;
-  }
-
-  .hamburger{
-    all: unset;
-    width: 42px; height: 42px;
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer;
-    border-radius: 50%;
-    transition: background 0.2s ease;
-  }
-  .hamburger:hover{ background: rgba(255,255,255,0.12); }
-  .hamburger svg{ display: block; }
-  .hamburger .icon-close{ display: none; }
-  .hamburger.open .icon-open{ display: none; }
-  .hamburger.open .icon-close{ display: block; }
-
-  /* ---------- Full-screen nav overlay ---------- */
-  .nav-overlay{
-    position: fixed;
-    inset: 0;
-    background: linear-gradient(160deg, var(--plum-deep) 0%, var(--plum) 100%);
-    z-index: 900;
-    display: flex;
-    flex-direction: column;
-    padding: 110px 8vw 40px;
-    overflow-y: auto;
-    transform: translateY(-100%);
-    transition: transform 0.35s ease;
-  }
-  .nav-overlay.open{ transform: translateY(0); }
-
-  .nav-columns{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 56px;
-    flex: 1;
-  }
-
-  .nav-group{ min-width: 200px; }
-
-  .nav-group-title{
-    color: rgba(255,255,255,0.55);
-    font-size: 0.78rem;
-    font-weight: 800;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: 16px;
-  }
-
-  .nav-group ul{ list-style: none; margin: 0; padding: 0; }
-  .nav-group li{ margin-bottom: 10px; }
-
-  .nav-group a{
-    text-decoration: none;
-    color: white;
-    font-family: 'Fraunces', serif;
-    font-weight: 600;
-    font-size: 1.35rem;
-    transition: color 0.15s ease, opacity 0.15s ease;
-    opacity: 0.92;
-  }
-  .nav-group a:hover{ color: var(--blush-soft); opacity: 1; }
-
-  .nav-lang{
-    margin-top: 40px;
-    padding-top: 24px;
-    border-top: 1px solid rgba(255,255,255,0.15);
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-  .nav-lang label{
-    color: rgba(255,255,255,0.6);
-    font-size: 0.8rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-  }
-  .nav-lang select{
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.3);
-    color: white;
-    border-radius: 10px;
-    padding: 8px 14px;
-    font-family: 'Nunito Sans', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 700;
-  }
-  .nav-lang select option{ color: var(--ink); }
-
-  #google_translate_element{ display: none !important; }
-  .goog-te-banner-frame{ display: none !important; }
-  body{ top: 0 !important; }
 
   /* ---------- Hero ---------- */
   .hero{
@@ -386,34 +261,32 @@
     .section{ padding: 60px 6vw; }
     .intro-band{ padding: 56px 6vw; }
     .awareness{ padding: 50px 6vw; }
-    .nav-overlay{ padding: 100px 7vw 30px; }
-    .nav-columns{ gap: 40px; }
   }
 </style>
 </head>
 <body>
 
 <div class="topbar" id="topbar">
-  <a class="brand" href="#top">
-    <svg width="28" height="28" viewBox="0 0 30 30" fill="none">
+  <a class="brand" href="index.html">
+    <svg width="28" height="28" viewBox="0 0 30 30" fill="none" aria-hidden="true">
       <path d="M15 26C15 26 4 19.5 4 11.8C4 7.7 7.2 5 10.6 5C12.6 5 14.3 6 15 7.6C15.7 6 17.4 5 19.4 5C22.8 5 26 7.7 26 11.8C26 19.5 15 26 15 26Z" fill="white" fill-opacity="0.95"/>
     </svg>
     <span>We Mental<br>Health</span>
   </a>
   <button type="button" class="hamburger" id="menu-toggle" aria-label="Open menu">
-    <svg class="icon-open" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
-    <svg class="icon-close" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
+    <svg class="icon-open" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+    <svg class="icon-close" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
   </button>
 </div>
 
-<nav class="nav-overlay" id="nav-overlay">
+<nav class="nav-overlay" id="nav-overlay" aria-label="Main navigation">
   <div class="nav-columns">
     <div class="nav-group">
       <div class="nav-group-title">The Club</div>
       <ul>
-        <li><a href="#top" class="nav-link">Home</a></li>
-        <li><a href="#about" class="nav-link">About Us</a></li>
-        <li><a href="#mission" class="nav-link">Our Mission</a></li>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#about">About Us</a></li>
+        <li><a href="index.html#mission">Our Mission</a></li>
       </ul>
     </div>
     <div class="nav-group">
@@ -433,7 +306,7 @@
       <div class="nav-group-title">Get Help</div>
       <ul>
         <li><a href="community.html">Community Support</a></li>
-        <li><a href="#contact" class="nav-link">Contact Us</a></li>
+        <li><a href="index.html#contact">Contact Us</a></li>
         <li><a href="privacy.html">Privacy Policy</a></li>
       </ul>
     </div>
@@ -443,9 +316,9 @@
     <label for="lang-select">Language</label>
     <select id="lang-select">
       <option value="en">English</option>
-      <option value="fr">Français</option>
-      <option value="es">Español</option>
-      <option value="pt">Português</option>
+      <option value="fr">Fran&ccedil;ais</option>
+      <option value="es">Espa&ntilde;ol</option>
+      <option value="pt">Portugu&ecirc;s</option>
       <option value="sw">Kiswahili</option>
     </select>
   </div>
@@ -591,100 +464,8 @@
   <p style="margin-top: 6px;"><a href="privacy.html">Privacy Policy</a></p>
 </footer>
 
-<script>
-  // Top bar solidifies once scrolled past the hero
-  var topbar = document.getElementById('topbar');
-  window.addEventListener('scroll', function(){
-    topbar.classList.toggle('solid', window.scrollY > 80);
-  });
-
-  // Hamburger toggle
-  var menuToggle = document.getElementById('menu-toggle');
-  var navOverlay = document.getElementById('nav-overlay');
-
-  function closeMenu(){
-    navOverlay.classList.remove('open');
-    menuToggle.classList.remove('open');
-  }
-  function toggleMenu(){
-    var isOpen = navOverlay.classList.toggle('open');
-    menuToggle.classList.toggle('open', isOpen);
-  }
-  menuToggle.addEventListener('click', toggleMenu);
-
-  // Same-page nav links close the menu and smooth-scroll
-  document.querySelectorAll('.nav-link').forEach(function(link){
-    link.addEventListener('click', function(e){
-      var targetId = link.getAttribute('href');
-      if (targetId.charAt(0) === '#'){
-        e.preventDefault();
-        closeMenu();
-        var target = document.querySelector(targetId === '#top' ? 'body' : targetId);
-        if (target){
-          window.scrollTo({ top: targetId === '#top' ? 0 : target.offsetTop - 76, behavior: 'smooth' });
-        }
-      }
-    });
-  });
-  // Links to other pages (Resources, Community, etc.) just close the menu on click, navigation proceeds normally
-  document.querySelectorAll('.nav-overlay a:not(.nav-link)').forEach(function(link){
-    link.addEventListener('click', closeMenu);
-  });
-</script>
-
-<script type="text/javascript">
-  function googleTranslateElementInit() {
-    new google.translate.TranslateElement(
-      { pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE },
-      'google_translate_element'
-    );
-  }
-
-  function getCookie(name){
-    var match = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
-    return match ? decodeURIComponent(match[1]) : null;
-  }
-
-  function setLanguage(lang){
-    var hostname = window.location.hostname;
-    document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-    document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + hostname;
-    if (lang !== 'en'){
-      document.cookie = 'googtrans=/en/' + lang + '; path=/';
-      document.cookie = 'googtrans=/en/' + lang + '; path=/; domain=' + hostname;
-    }
-    try { localStorage.setItem('wmh_lang_decided', '1'); } catch (e) {}
-    location.reload();
-  }
-
-  document.getElementById('lang-select').addEventListener('change', function(){
-    setLanguage(this.value);
-  });
-
-  // Reflect current language in the dropdown
-  (function(){
-    var c = getCookie('googtrans');
-    var current = c ? c.split('/').pop() : 'en';
-    var select = document.getElementById('lang-select');
-    if (select) select.value = current || 'en';
-  })();
-
-  // Auto-detect browser language once per visitor, never overriding a manual choice
-  (function autoDetectLanguage(){
-    var alreadyDecided = false;
-    try { alreadyDecided = localStorage.getItem('wmh_lang_decided') === '1'; } catch (e) {}
-    if (alreadyDecided) return;
-
-    var browserLang = (navigator.language || navigator.userLanguage || 'en').split('-')[0].toLowerCase();
-    if (browserLang === 'en'){
-      try { localStorage.setItem('wmh_lang_decided', '1'); } catch (e) {}
-      return;
-    }
-    setLanguage(browserLang);
-  })();
-</script>
-<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-<div id="google_translate_element"></div>
+<script src="site-nav.js"></script>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 </body>
 </html>
