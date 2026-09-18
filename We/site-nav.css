@@ -1,0 +1,204 @@
+/* ==========================================================================
+   We Mental Health — shared site navigation
+   Used by index.html and every resource page. Edit the nav in ONE place.
+   Pairs with site-nav.js (behaviour) and the markup block in each page.
+   ========================================================================== */
+
+:root{
+  --plum: #6a4c93;
+  --plum-deep: #543b78;
+  --plum-light: #8a63b8;
+  --blush: #f4c9d6;
+  --blush-soft: #fbe7ec;
+  --rose-gold: #cf8fa3;
+  --cream: #fff9fb;
+  --ink: #3a2f42;
+  --ink-soft: #6e6178;
+  --topbar-h: 76px;
+}
+
+/* ---------- Top bar ---------- */
+.topbar{
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--topbar-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  background: rgba(84,59,120,0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  /* Must sit ABOVE .nav-overlay, or the close (X) button is buried by the
+     open menu and the only way out is to navigate away. */
+  z-index: 1000;
+  transition: background 0.25s ease;
+}
+/* While the menu is open the overlay gradient is the background */
+.topbar.menu-open,
+.topbar.menu-open.solid,
+.topbar.menu-open.always-solid{
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+/* Pages that are not the photo hero start solid so the bar never floats on cream */
+.topbar.solid,
+.topbar.always-solid{
+  background: var(--plum-deep);
+}
+
+.topbar .brand{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.topbar .brand svg{ flex-shrink: 0; }
+.topbar .brand span{
+  font-family: 'Fraunces', serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.15;
+  display: block;
+}
+
+.hamburger{
+  all: unset;
+  width: 42px; height: 42px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background 0.2s ease;
+}
+.hamburger:hover{ background: rgba(255,255,255,0.12); }
+.hamburger:focus-visible{ outline: 2px solid var(--blush-soft); outline-offset: 2px; }
+.hamburger svg{ display: block; }
+.hamburger .icon-close{ display: none; }
+.hamburger.open .icon-open{ display: none; }
+.hamburger.open .icon-close{ display: block; }
+
+/* ---------- Full-screen nav overlay ---------- */
+.nav-overlay{
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(160deg, var(--plum-deep) 0%, var(--plum) 100%);
+  z-index: 900;
+  display: flex;
+  flex-direction: column;
+  padding: 110px 8vw 40px;
+  overflow-y: auto;
+  transform: translateY(-100%);
+  /* visibility keeps closed-menu links out of the tab order without killing the slide */
+  visibility: hidden;
+  transition: transform 0.35s ease, visibility 0s linear 0.35s;
+}
+.nav-overlay.open{
+  transform: translateY(0);
+  visibility: visible;
+  transition: transform 0.35s ease, visibility 0s linear 0s;
+}
+
+.nav-columns{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 56px;
+  flex: 1;
+}
+
+.nav-group{ min-width: 200px; }
+
+.nav-group-title{
+  color: rgba(255,255,255,0.55);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.nav-group ul{ list-style: none; margin: 0; padding: 0; }
+.nav-group li{ margin-bottom: 10px; }
+
+.nav-group a{
+  text-decoration: none;
+  color: white;
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 1.35rem;
+  transition: color 0.15s ease, opacity 0.15s ease;
+  opacity: 0.92;
+  display: inline-block;
+}
+.nav-group a:hover{ color: var(--blush-soft); opacity: 1; }
+.nav-group a:focus-visible{ outline: 2px solid var(--blush-soft); outline-offset: 3px; border-radius: 4px; }
+
+/* The page you are already on */
+.nav-group a[aria-current="page"]{
+  color: var(--blush);
+  opacity: 1;
+}
+.nav-group a[aria-current="page"]::before{
+  content: "";
+  display: inline-block;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--blush);
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.nav-lang{
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.15);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.nav-lang label{
+  color: rgba(255,255,255,0.6);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.nav-lang select{
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: white;
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+.nav-lang select option{ color: var(--ink); }
+
+/* ---------- Google Translate chrome ---------- */
+#google_translate_element{ display: none !important; }
+.goog-te-banner-frame{ display: none !important; }
+body{ top: 0 !important; }
+
+/* ---------- Resource pages sit below the fixed bar ---------- */
+body.has-topbar main{
+  margin-left: 0;
+  min-height: 100vh;
+  padding-top: var(--topbar-h);
+}
+
+@media (max-width: 720px){
+  .topbar{ padding: 0 18px; }
+  .nav-overlay{ padding: 100px 7vw 30px; }
+  .nav-columns{ gap: 40px; }
+  .nav-group a{ font-size: 1.2rem; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .nav-overlay{ transition: none; }
+}
