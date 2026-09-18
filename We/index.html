@@ -4,9 +4,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>We Mental Health</title>
+<meta name="description" content="We Mental Health supports the mental wellbeing of female athletes across Nigeria, Africa, and beyond — confidential support, real crisis resources, and a community that listens.">
+<link rel="canonical" href="https://wementalhealth.duckdns.org/index.html">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="We Mental Health">
+<meta property="og:description" content="We Mental Health supports the mental wellbeing of female athletes across Nigeria, Africa, and beyond — confidential support, real crisis resources, and a community that listens.">
+<meta property="og:url" content="https://wementalhealth.duckdns.org/index.html">
+<meta property="og:image" content="https://images.unsplash.com/photo-1770237710759-82b2962cd4ab?auto=format&fit=crop&w=1200&q=80">
+<meta property="og:site_name" content="We Mental Health">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="We Mental Health">
+<meta name="twitter:description" content="We Mental Health supports the mental wellbeing of female athletes across Nigeria, Africa, and beyond — confidential support, real crisis resources, and a community that listens.">
+<meta name="twitter:image" content="https://images.unsplash.com/photo-1770237710759-82b2962cd4ab?auto=format&fit=crop&w=1200&q=80">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
     --plum: #6a4c93;
@@ -18,7 +33,6 @@
     --cream: #fff9fb;
     --ink: #3a2f42;
     --ink-soft: #6e6178;
-    --sidebar-w: 264px;
   }
 
   * { box-sizing: border-box; }
@@ -33,143 +47,219 @@
 
   h1, h2, h3 { font-family: 'Fraunces', serif; font-weight: 600; }
 
-  /* ---------- Sidebar ---------- */
-  .sidebar{
+  a { color: inherit; }
+
+  /* ---------- Top bar ---------- */
+  .topbar{
     position: fixed;
-    top: 0; left: 0;
-    width: var(--sidebar-w);
-    height: 100vh;
-    background: linear-gradient(195deg, var(--plum) 0%, var(--plum-light) 100%);
-    color: white;
+    top: 0; left: 0; right: 0;
+    height: 76px;
     display: flex;
-    flex-direction: column;
-    padding: 34px 22px;
-    z-index: 1000;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 28px;
+    background: rgba(84,59,120,0.55);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    z-index: 500;
+    transition: background 0.25s ease;
+  }
+  .topbar.solid{
+    background: var(--plum-deep);
   }
 
   .brand{
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-bottom: 40px;
-    padding-left: 4px;
+    color: white;
+    text-decoration: none;
   }
-
-  .brand svg{ flex-shrink: 0; }
-
   .brand span{
     font-family: 'Fraunces', serif;
-    font-size: 1.28rem;
+    font-size: 1.2rem;
     font-weight: 600;
     line-height: 1.15;
   }
 
-  .tabs{
-    list-style: none;
-    margin: 0; padding: 0;
+  .hamburger{
+    all: unset;
+    width: 42px; height: 42px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background 0.2s ease;
+  }
+  .hamburger:hover{ background: rgba(255,255,255,0.12); }
+  .hamburger svg{ display: block; }
+  .hamburger .icon-close{ display: none; }
+  .hamburger.open .icon-open{ display: none; }
+  .hamburger.open .icon-close{ display: block; }
+
+  /* ---------- Full-screen nav overlay ---------- */
+  .nav-overlay{
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(160deg, var(--plum-deep) 0%, var(--plum) 100%);
+    z-index: 900;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    padding: 110px 8vw 40px;
+    overflow-y: auto;
+    transform: translateY(-100%);
+    transition: transform 0.35s ease;
+  }
+  .nav-overlay.open{ transform: translateY(0); }
+
+  .nav-columns{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 56px;
+    flex: 1;
   }
 
-  .tabs button{
-    all: unset;
+  .nav-group{ min-width: 200px; }
+
+  .nav-group-title{
+    color: rgba(255,255,255,0.55);
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .nav-group ul{ list-style: none; margin: 0; padding: 0; }
+  .nav-group li{ margin-bottom: 10px; }
+
+  .nav-group a{
+    text-decoration: none;
+    color: white;
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 1.35rem;
+    transition: color 0.15s ease, opacity 0.15s ease;
+    opacity: 0.92;
+  }
+  .nav-group a:hover{ color: var(--blush-soft); opacity: 1; }
+
+  .nav-lang{
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.15);
     display: flex;
     align-items: center;
     gap: 12px;
-    width: 100%;
-    padding: 13px 16px;
-    border-radius: 30px;
-    font-size: 0.98rem;
-    font-weight: 700;
-    color: rgba(255,255,255,0.85);
-    cursor: pointer;
-    transition: background 0.2s ease, color 0.2s ease;
+    flex-wrap: wrap;
   }
-
-  .tabs button svg{ opacity: 0.9; flex-shrink: 0; }
-
-  .tabs button:hover{
-    background: rgba(255,255,255,0.12);
-    color: white;
-  }
-
-  .tabs button.active{
-    background: var(--blush-soft);
-    color: var(--plum-deep);
-  }
-
-  .tabs button.active svg{ opacity: 1; }
-
-  .sidebar-footer{
-    margin-top: auto;
-    padding-left: 4px;
+  .nav-lang label{
+    color: rgba(255,255,255,0.6);
     font-size: 0.8rem;
-    color: rgba(255,255,255,0.65);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
   }
-
-  /* Hide Google Translate UI elements properly */
-  #google_translate_element { display: none !important; }
-  .goog-te-banner-frame { display: none !important; }
-  body { top: 0 !important; }
-
-  /* ---------- Main content ---------- */
-  main{
-    margin-left: var(--sidebar-w);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+  .nav-lang select{
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white;
+    border-radius: 10px;
+    padding: 8px 14px;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
   }
+  .nav-lang select option{ color: var(--ink); }
 
-  .panel{ display: none; animation: fade 0.35s ease; }
-  .panel.active{ display: block; }
+  #google_translate_element{ display: none !important; }
+  .goog-te-banner-frame{ display: none !important; }
+  body{ top: 0 !important; }
 
-  @keyframes fade{
-    from{ opacity: 0; transform: translateY(6px); }
-    to{ opacity: 1; transform: translateY(0); }
-  }
-
+  /* ---------- Hero ---------- */
   .hero{
     position: relative;
-    overflow: hidden;
-    min-height: 480px;
+    min-height: 100vh;
     display: flex;
-    align-items: center;
-    padding: 70px 60px;
+    align-items: flex-end;
+    padding: 140px 7vw 90px;
     background-image:
-      linear-gradient(100deg, rgba(84,59,120,0.88) 0%, rgba(84,59,120,0.55) 45%, rgba(84,59,120,0.15) 75%),
-      url('https://images.unsplash.com/photo-1770237710759-82b2962cd4ab?auto=format&fit=crop&w=1600&q=80');
+      linear-gradient(180deg, rgba(58,41,80,0.35) 0%, rgba(58,41,80,0.25) 40%, rgba(58,41,80,0.85) 100%),
+      url('https://images.unsplash.com/photo-1770237710759-82b2962cd4ab?auto=format&fit=crop&w=1800&q=80');
     background-size: cover;
-    background-position: center 30%;
+    background-position: center 25%;
+    background-attachment: scroll;
   }
 
-  .hero-text{ position: relative; z-index: 1; max-width: 640px; }
+  .hero-eyebrow{
+    color: var(--blush-soft);
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
 
   .hero h1{
-    font-size: clamp(2.4rem, 4.6vw, 3.4rem);
+    font-size: clamp(2.6rem, 7vw, 5.2rem);
+    line-height: 1.02;
     color: white;
-    margin: 0 0 16px;
-    max-width: 15ch;
-    text-shadow: 0 2px 18px rgba(0,0,0,0.25);
+    margin: 0 0 22px;
+    max-width: 16ch;
+    text-shadow: 0 4px 30px rgba(0,0,0,0.3);
   }
 
   .hero p{
-    max-width: 52ch;
-    font-size: 1.14rem;
+    max-width: 54ch;
+    font-size: 1.18rem;
     color: rgba(255,255,255,0.92);
-    text-shadow: 0 1px 12px rgba(0,0,0,0.2);
+    text-shadow: 0 2px 14px rgba(0,0,0,0.25);
+    margin: 0 0 28px;
   }
 
+  .hero-actions{ display: flex; gap: 14px; flex-wrap: wrap; }
+  .hero-actions a{
+    display: inline-block;
+    padding: 14px 30px;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 0.96rem;
+    text-decoration: none;
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+  .hero-actions .primary{ background: white; color: var(--plum-deep); }
+  .hero-actions .primary:hover{ background: var(--blush-soft); transform: translateY(-1px); }
+  .hero-actions .secondary{ background: transparent; color: white; border: 2px solid rgba(255,255,255,0.55); }
+  .hero-actions .secondary:hover{ border-color: white; transform: translateY(-1px); }
+
+  /* ---------- Cream intro band ---------- */
+  .intro-band{
+    background: var(--cream);
+    padding: 80px 7vw;
+    text-align: center;
+  }
+  .intro-band h2{
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    color: var(--plum-deep);
+    max-width: 20ch;
+    margin: 0 auto 18px;
+  }
+  .intro-band p{
+    max-width: 62ch;
+    margin: 0 auto;
+    color: var(--ink-soft);
+    font-size: 1.08rem;
+  }
+
+  /* ---------- Sport strip ---------- */
   .sport-strip{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 3px;
     background: white;
   }
-
   .sport-strip img{
     width: 100%;
-    height: 140px;
+    height: 220px;
     object-fit: cover;
     display: block;
     filter: grayscale(15%);
@@ -177,18 +267,69 @@
   }
   .sport-strip img:hover{ filter: grayscale(0%); }
 
+  /* ---------- Section wrapper (About/Mission/Resources/Contact) ---------- */
+  .section{
+    padding: 90px 7vw;
+    scroll-margin-top: 90px;
+  }
+  .section.alt{ background: var(--blush-soft); }
+
+  .section-inner{ max-width: 760px; margin: 0 auto; }
+  .section-inner.wide{ max-width: 1000px; }
+
+  .accent-tag{
+    display: inline-block;
+    background: var(--blush-soft);
+    color: var(--rose-gold);
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+  .section.alt .accent-tag{ background: white; }
+
+  .section h2{ color: var(--plum); font-size: clamp(1.7rem, 3.4vw, 2.2rem); margin: 0 0 16px; }
+  .section p{ color: var(--ink-soft); max-width: 68ch; font-size: 1.05rem; }
+
+  .resource-list{
+    list-style: none;
+    margin: 26px 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 14px;
+  }
+  .resource-list a{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--ink);
+    background: white;
+    border-radius: 14px;
+    padding: 18px 20px;
+    font-weight: 700;
+    font-size: 0.98rem;
+    box-shadow: 0 6px 18px rgba(106,76,147,0.08);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  .resource-list a:hover{ transform: translateY(-3px); box-shadow: 0 10px 24px rgba(106,76,147,0.16); }
+  .resource-list .dot{ width: 9px; height: 9px; border-radius: 50%; background: var(--rose-gold); flex-shrink: 0; }
+
+  /* ---------- Awareness stat ---------- */
   .awareness{
     background: linear-gradient(160deg, var(--plum-deep) 0%, var(--plum) 100%);
-    padding: 54px 60px;
+    padding: 70px 7vw;
     display: flex;
     align-items: center;
     gap: 48px;
     flex-wrap: wrap;
   }
-
   .awareness-visual{ flex: 0 0 auto; width: 150px; height: 150px; }
   .awareness-text{ flex: 1 1 420px; color: white; }
-
   .awareness-stat{
     font-family: 'Fraunces', serif;
     font-weight: 600;
@@ -197,10 +338,8 @@
     margin: 0 0 10px;
     color: white;
   }
-
   .awareness-text p{ margin: 0 0 20px; max-width: 60ch; color: rgba(255,255,255,0.88); font-size: 1.02rem; }
   .awareness-text .source{ font-size: 0.78rem; color: rgba(255,255,255,0.6); margin: -10px 0 20px; }
-  
   .awareness-actions{ display: flex; gap: 14px; flex-wrap: wrap; }
   .awareness-actions a{
     display: inline-block; padding: 12px 24px; border-radius: 30px;
@@ -212,322 +351,340 @@
   .awareness-actions .secondary{ background: transparent; color: white; border: 2px solid rgba(255,255,255,0.5); }
   .awareness-actions .secondary:hover{ transform: translateY(-1px); border-color: white; }
 
-  /* Inner content spacing for text pages */
-  .panel-inner{ padding: 40px 60px 90px; }
-
-  .card{
-    background: white; border-radius: 20px;
-    padding: 38px clamp(24px, 4vw, 44px);
-    margin-bottom: 26px;
-    box-shadow: 0 10px 30px rgba(106, 76, 147, 0.08);
-    border: 1px solid #f1e4ea;
+  /* ---------- Contact ---------- */
+  .contact-links{ display: flex; flex-direction: column; gap: 14px; margin-top: 24px; }
+  .contact-link{
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--ink);
+    background: white;
+    border-radius: 14px;
+    padding: 16px 20px;
+    font-weight: 700;
+    width: fit-content;
+    box-shadow: 0 6px 18px rgba(106,76,147,0.08);
+    transition: transform 0.18s ease;
   }
-
-  .card h2{ color: var(--plum); font-size: 1.6rem; margin: 0 0 16px; }
-  .card p{ color: var(--ink-soft); max-width: 68ch; }
-
-  .accent-tag{
-    display: inline-block; background: var(--blush-soft); color: var(--rose-gold);
-    font-size: 0.75rem; font-weight: 800; letter-spacing: 0.08em;
-    text-transform: uppercase; padding: 5px 14px; border-radius: 20px;
-    margin-bottom: 16px;
-  }
-
-  .resource-list{
-    list-style: none; margin: 20px 0 0; padding: 0;
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px;
-  }
-
-  .resource-list a{
-    display: flex; align-items: center; gap: 12px;
-    text-decoration: none; color: var(--ink);
-    background: var(--blush-soft); border-radius: 14px;
-    padding: 16px 18px; font-weight: 700; font-size: 0.96rem;
-    transition: transform 0.18s ease, background 0.18s ease;
-  }
-  .resource-list a:hover{ background: var(--blush); transform: translateY(-2px); }
-  .resource-list .dot{ width: 9px; height: 9px; border-radius: 50%; background: var(--rose-gold); flex-shrink: 0; }
-
-  .button{
-    display: inline-block; margin-top: 22px; background: var(--plum); color: white;
-    padding: 13px 28px; text-decoration: none; border-radius: 30px; font-weight: 700;
-    box-shadow: 0 8px 20px rgba(106,76,147,0.28); transition: background 0.2s ease, transform 0.2s ease; border: none; cursor: pointer;
-  }
-  .button:hover{ background: var(--plum-deep); transform: translateY(-1px); }
+  .contact-link:hover{ transform: translateY(-2px); }
+  .contact-link svg{ flex-shrink: 0; color: var(--plum); }
 
   footer{
-    background: var(--plum); color: rgba(255,255,255,0.85); text-align: center;
-    padding: 24px; font-size: 0.9rem; margin-top: auto;
+    background: var(--plum-deep);
+    color: rgba(255,255,255,0.85);
+    text-align: center;
+    padding: 28px;
+    font-size: 0.9rem;
   }
+  footer a{ text-decoration: underline; color: rgba(255,255,255,0.85); }
 
-  /* ---------- Very Mobile Adjustments ---------- */
-  @media (max-width: 880px){
-    .sidebar{
-      position: sticky; /* Keeps nav visible on scroll */
-      width: 100%;
-      height: auto;
-      flex-direction: row;
-      align-items: center;
-      padding: 12px 16px;
-      gap: 12px;
-      overflow-x: auto;
-      /* Hide scrollbars for slick app-like feel */
-      -ms-overflow-style: none; 
-      scrollbar-width: none;
-    }
-    .sidebar::-webkit-scrollbar { display: none; }
-    
-    .brand{ margin-bottom: 0; padding-right: 15px; border-right: 1px solid rgba(255,255,255,0.2); }
-    .brand span{ font-size: 1rem; display: none; } /* Hide text to save space, keep logo */
-    
-    .tabs{ flex-direction: row; gap: 6px; }
-    .tabs button{ padding: 10px 16px; white-space: nowrap; font-size: 0.9rem; }
-    .sidebar-footer{ display: none; }
-    
-    main{ margin-left: 0; }
-    
-    .hero{ padding: 40px 24px; min-height: 360px; background-position: center; }
+  @media (max-width: 720px){
+    .hero{ padding: 120px 6vw 60px; align-items: flex-end; min-height: 90vh; }
     .sport-strip{ grid-template-columns: repeat(2, 1fr); }
-    .sport-strip img{ height: 110px; }
-    
-    .awareness{ padding: 40px 24px; flex-direction: column; text-align: center; }
-    .awareness-actions{ justify-content: center; }
-    
-    .panel-inner{ padding: 24px 16px 60px; }
-    .card { padding: 24px 20px; }
-    
-    /* Make resources stack into big touch-friendly blocks on phones */
-    .resource-list { grid-template-columns: 1fr; } 
+    .sport-strip img{ height: 160px; }
+    .section{ padding: 60px 6vw; }
+    .intro-band{ padding: 56px 6vw; }
+    .awareness{ padding: 50px 6vw; }
+    .nav-overlay{ padding: 100px 7vw 30px; }
+    .nav-columns{ gap: 40px; }
   }
 </style>
 </head>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-  
 <body>
 
-<div class="sidebar">
-  <div class="brand">
-    <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+<div class="topbar" id="topbar">
+  <a class="brand" href="#top">
+    <svg width="28" height="28" viewBox="0 0 30 30" fill="none">
       <path d="M15 26C15 26 4 19.5 4 11.8C4 7.7 7.2 5 10.6 5C12.6 5 14.3 6 15 7.6C15.7 6 17.4 5 19.4 5C22.8 5 26 7.7 26 11.8C26 19.5 15 26 15 26Z" fill="white" fill-opacity="0.95"/>
     </svg>
     <span>We Mental<br>Health</span>
-  </div>
-
-  <ul class="tabs">
-    <li><button type="button" class="tab-btn active" data-tab="home">
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      Home
-    </button></li>
-    <li><button type="button" class="tab-btn" data-tab="about">
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
-      About
-    </button></li>
-    <li><button type="button" class="tab-btn" data-tab="mission">
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.4 6.5L21 11l-6.6 2.5L12 20l-2.4-6.5L3 11l6.6-2.5z"/></svg>
-      Mission
-    </button></li>
-    <li><button type="button" class="tab-btn" data-tab="contact">
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
-      Contact
-    </button></li>
-  </ul>
-
-  <div class="sidebar-footer">
-    Supporting women in sport, one mind at a time.
-  </div>
-  <div id="google_translate_element"></div>
+  </a>
+  <button type="button" class="hamburger" id="menu-toggle" aria-label="Open menu">
+    <svg class="icon-open" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+    <svg class="icon-close" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
+  </button>
 </div>
 
-<main>
-
-  <!-- HOME PANEL (Default) -->
-  <section class="panel active" id="panel-home">
-    <div class="hero">
-      <div class="hero-text">
-        <h1>Your mind deserves the same training as your game.</h1>
-        <p>
-          We Mental Health is a space for female athletes to understand, protect, and talk
-          openly about their mental well-being without losing an ounce of competitive edge.
-        </p>
-      </div>
+<nav class="nav-overlay" id="nav-overlay">
+  <div class="nav-columns">
+    <div class="nav-group">
+      <div class="nav-group-title">The Club</div>
+      <ul>
+        <li><a href="#top" class="nav-link">Home</a></li>
+        <li><a href="#about" class="nav-link">About Us</a></li>
+        <li><a href="#mission" class="nav-link">Our Mission</a></li>
+      </ul>
     </div>
-
-    <div class="sport-strip">
-      <img src="https://images.unsplash.com/photo-1709403552725-97e0ba206cb8?auto=format&fit=crop&w=500&q=80" alt="Female tennis player in action on the court">
-      <img src="https://images.unsplash.com/photo-1771257807721-b7da59c6d46d?auto=format&fit=crop&w=500&q=80" alt="Group of young women in basketball uniforms">
-      <img src="https://images.unsplash.com/photo-1772475625546-d89df18856ff?auto=format&fit=crop&w=500&q=80" alt="Athletes competing in a hurdle race on a track">
-      <img src="https://images.unsplash.com/photo-1604818624842-a4443ab26c85?auto=format&fit=crop&w=500&q=80" alt="Woman cycling outdoors">
+    <div class="nav-group">
+      <div class="nav-group-title">Resources</div>
+      <ul>
+        <li><a href="articles.html">Mental Wellness Articles</a></li>
+        <li><a href="stress.html">Stress &amp; Anxiety Tips</a></li>
+        <li><a href="Anxiety.html">Understanding Anxiety</a></li>
+        <li><a href="selfcare.html">Self-Care Practices</a></li>
+        <li><a href="PostpartumDepression.html">Postpartum Depression</a></li>
+        <li><a href="sex-education.html">Sex Education</a></li>
+        <li><a href="stories.html">Athlete Stories</a></li>
+        <li><a href="evidence.html">Documenting Abuse</a></li>
+      </ul>
     </div>
-
-    <!-- Featured Resources right on the home page -->
-    <div class="panel-inner" style="padding-bottom: 20px;">
-      <div class="card" style="margin-bottom: 0;">
-        <span class="accent-tag">Explore</span>
-        <h2>Mental Health Resources</h2>
-        <p>Practical reads and tools, built specifically for the pressures women in sport actually face.</p>
-        <ul class="resource-list">
-          <li><a href="articles.html"><span class="dot"></span>Mental Wellness Articles</a></li>
-          <li><a href="stress.html"><span class="dot"></span>Stress & Anxiety Tips</a></li>
-          <li><a href="Anxiety.html"><span class="dot"></span>Understanding Anxiety</a></li>
-          <li><a href="stories.html"><span class="dot"></span>Athlete Stories</a></li>
-          <li><a href="selfcare.html"><span class="dot"></span>Self-Care Practices</a></li>
-          <li><a href="community.html"><span class="dot"></span>Community Support</a></li>
-          <li><a href="sex-education.html"><span class="dot"></span>Sex Education</a></li>
-          <li><a href="PostpartumDepression.html"><span class="dot"></span>Postpartum Depression</a></li>
-        </ul>
-      </div>
+    <div class="nav-group">
+      <div class="nav-group-title">Get Help</div>
+      <ul>
+        <li><a href="community.html">Community Support</a></li>
+        <li><a href="#contact" class="nav-link">Contact Us</a></li>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+      </ul>
     </div>
+  </div>
 
-    <div class="awareness">
-      <div class="awareness-visual">
-        <svg viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="75" cy="75" r="70" stroke="rgba(255,255,255,0.25)" stroke-width="2" stroke-dasharray="4 6"/>
-          <g fill="#fbe7ec">
-            <circle cx="75" cy="30" r="13"/>
-            <circle cx="118" cy="58" r="13"/>
-            <circle cx="103" cy="105" r="13"/>
-            <circle cx="47" cy="105" r="13"/>
-            <circle cx="32" cy="58" r="13"/>
-          </g>
-          <g stroke="#fbe7ec" stroke-width="2.5" stroke-linecap="round" opacity="0.85">
-            <line x1="75" y1="30" x2="118" y2="58"/>
-            <line x1="118" y1="58" x2="103" y2="105"/>
-            <line x1="103" y1="105" x2="47" y2="105"/>
-            <line x1="47" y1="105" x2="32" y2="58"/>
-            <line x1="32" y1="58" x2="75" y2="30"/>
-          </g>
-        </svg>
-      </div>
-      <div class="awareness-text">
-        <p class="awareness-stat">Almost 1 in 3</p>
-        <p>
-          women worldwide have experienced physical and/or sexual violence in their lifetime —
-          often from someone they know, including within sport. You are not alone, and reaching
-          out is never an overreaction.
-        </p>
-        <p class="source">Source: WHO / UN Women, 2025 global estimates</p>
-        <div class="awareness-actions">
-          <a class="primary" href="community.html">Get Confidential Support</a>
-          <a class="secondary" href="evidence.html">Know Your Options</a>
-        </div>
-      </div>
+  <div class="nav-lang">
+    <label for="lang-select">Language</label>
+    <select id="lang-select">
+      <option value="en">English</option>
+      <option value="fr">Français</option>
+      <option value="es">Español</option>
+      <option value="pt">Português</option>
+      <option value="sw">Kiswahili</option>
+    </select>
+  </div>
+</nav>
+
+<div id="top"></div>
+
+<div class="hero">
+  <div>
+    <div class="hero-eyebrow">We Mental Health</div>
+    <h1>Your mind deserves the same training as your game.</h1>
+    <p>
+      A space for female athletes to understand, protect, and talk openly about their
+      mental well-being — without losing an ounce of competitive edge.
+    </p>
+    <div class="hero-actions">
+      <a class="primary" href="community.html">Get Confidential Support</a>
+      <a class="secondary nav-link" href="#resources">Explore Resources</a>
     </div>
-  </section>
+  </div>
+</div>
 
-  <!-- ABOUT PANEL -->
-  <section class="panel" id="panel-about">
-    <div class="panel-inner">
-      <div class="card">
-        <span class="accent-tag">Who we are</span>
-        <h2>About Us</h2>
-        <p>
-          We Mental Health is dedicated to raising awareness of the mental health
-          challenges experienced by women and girls in sports. We believe that mental
-          well-being is just as important as physical performance, and that every
-          athlete deserves access to support, understanding, and resources built
-          specifically around what she's going through.
-        </p>
-      </div>
+<div class="intro-band">
+  <h2>A space built for you, on and off the field.</h2>
+  <p>
+    We Mental Health is dedicated to raising awareness of the mental health challenges
+    experienced by women and girls in sports — with real resources, a confidential way
+    to reach out, and a community that actually listens.
+  </p>
+</div>
+
+<div class="sport-strip">
+  <img src="https://images.unsplash.com/photo-1709403552725-97e0ba206cb8?auto=format&fit=crop&w=600&q=80" alt="Female tennis player in action on the court">
+  <img src="https://images.unsplash.com/photo-1771257807721-b7da59c6d46d?auto=format&fit=crop&w=600&q=80" alt="Group of young women in basketball uniforms">
+  <img src="https://images.unsplash.com/photo-1772475625546-d89df18856ff?auto=format&fit=crop&w=600&q=80" alt="Athletes competing in a hurdle race on a track">
+  <img src="https://images.unsplash.com/photo-1604818624842-a4443ab26c85?auto=format&fit=crop&w=600&q=80" alt="Woman cycling outdoors">
+</div>
+
+<section class="section" id="resources">
+  <div class="section-inner wide">
+    <span class="accent-tag">Explore</span>
+    <h2>Mental Health Resources</h2>
+    <p>Practical reads and tools, built specifically for the pressures women in sport actually face.</p>
+    <ul class="resource-list">
+      <li><a href="articles.html"><span class="dot"></span>Mental Wellness Articles</a></li>
+      <li><a href="stress.html"><span class="dot"></span>Stress &amp; Anxiety Tips</a></li>
+      <li><a href="Anxiety.html"><span class="dot"></span>Understanding Anxiety</a></li>
+      <li><a href="stories.html"><span class="dot"></span>Athlete Stories</a></li>
+      <li><a href="selfcare.html"><span class="dot"></span>Self-Care Practices</a></li>
+      <li><a href="community.html"><span class="dot"></span>Community Support</a></li>
+      <li><a href="sex-education.html"><span class="dot"></span>Sex Education</a></li>
+      <li><a href="PostpartumDepression.html"><span class="dot"></span>Postpartum Depression</a></li>
+      <li><a href="evidence.html"><span class="dot"></span>Documenting Abuse</a></li>
+    </ul>
+  </div>
+</section>
+
+<div class="awareness">
+  <div class="awareness-visual">
+    <svg viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="75" cy="75" r="70" stroke="rgba(255,255,255,0.25)" stroke-width="2" stroke-dasharray="4 6"/>
+      <g fill="#fbe7ec">
+        <circle cx="75" cy="30" r="13"/>
+        <circle cx="118" cy="58" r="13"/>
+        <circle cx="103" cy="105" r="13"/>
+        <circle cx="47" cy="105" r="13"/>
+        <circle cx="32" cy="58" r="13"/>
+      </g>
+      <g stroke="#fbe7ec" stroke-width="2.5" stroke-linecap="round" opacity="0.85">
+        <line x1="75" y1="30" x2="118" y2="58"/>
+        <line x1="118" y1="58" x2="103" y2="105"/>
+        <line x1="103" y1="105" x2="47" y2="105"/>
+        <line x1="47" y1="105" x2="32" y2="58"/>
+        <line x1="32" y1="58" x2="75" y2="30"/>
+      </g>
+    </svg>
+  </div>
+  <div class="awareness-text">
+    <p class="awareness-stat">Almost 1 in 3</p>
+    <p>
+      women worldwide have experienced physical and/or sexual violence in their lifetime —
+      often from someone they know, including within sport. You are not alone, and reaching
+      out is never an overreaction.
+    </p>
+    <p class="source">Source: WHO / UN Women, 2025 global estimates</p>
+    <div class="awareness-actions">
+      <a class="primary" href="community.html">Get Confidential Support</a>
+      <a class="secondary" href="evidence.html">Know Your Options</a>
     </div>
-  </section>
+  </div>
+</div>
 
-  <!-- MISSION PANEL -->
-  <section class="panel" id="panel-mission">
-    <div class="panel-inner">
-      <div class="card">
-        <span class="accent-tag">What drives us</span>
-        <h2>Our Mission</h2>
-        <p>
-          Our mission is to create a safe and inclusive space where female athletes,
-          coaches, and supporters can learn, connect, and advocate for better mental
-          health in sport. Together, we can break the stigma and promote healthy,
-          balanced athletic careers, on and off the field.
-        </p>
-      </div>
+<section class="section" id="about">
+  <div class="section-inner">
+    <span class="accent-tag">Who we are</span>
+    <h2>About Us</h2>
+    <p>
+      We Mental Health is dedicated to raising awareness of the mental health
+      challenges experienced by women and girls in sports. We believe that mental
+      well-being is just as important as physical performance, and that every
+      athlete deserves access to support, understanding, and resources built
+      specifically around what she's going through.
+    </p>
+  </div>
+</section>
+
+<section class="section alt" id="mission">
+  <div class="section-inner">
+    <span class="accent-tag">What drives us</span>
+    <h2>Our Mission</h2>
+    <p>
+      Our mission is to create a safe and inclusive space where female athletes,
+      coaches, and supporters can learn, connect, and advocate for better mental
+      health in sport. Together, we can break the stigma and promote healthy,
+      balanced athletic careers, on and off the field.
+    </p>
+  </div>
+</section>
+
+<section class="section" id="contact">
+  <div class="section-inner">
+    <span class="accent-tag">Let's talk</span>
+    <h2>Contact Us</h2>
+    <p>
+      We'd love to hear from athletes, coaches, researchers, and supporters who
+      share our vision of improving mental health in women's sports.
+    </p>
+    <div class="contact-links">
+      <a class="contact-link" href="mailto:wementalhealth1@gmail.com">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+        wementalhealth1@gmail.com
+      </a>
+      <a class="contact-link" href="https://t.me/we_mentalhealth" target="_blank" rel="noopener">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+        Telegram: @we_mentalhealth
+      </a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- CONTACT PANEL -->
-  <section class="panel" id="panel-contact">
-    <div class="panel-inner">
-      <div class="card">
-        <span class="accent-tag">Let's talk</span>
-        <h2>Contact Us</h2>
-        <p>
-          We'd love to hear from athletes, coaches, researchers, and supporters who
-          share our vision of improving mental health in women's sports.
-        </p>
-       <a class="contact-email" href="mailto:wementalhealth1@gmail.com">
-    <i class="fas fa-envelope"></i> wementalhealth1@gmail.com
-</a>
-<br>
-<a class="contact-telegram" href="https://t.me/we_mentalhealth" target="_blank">
-    <i class="fab fa-telegram"></i> Telegram
-</a> 
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <p>&copy; 2026 We Mental Health. Supporting Women in Sports, One Mind at a Time.</p>
-  </footer>
-
-</main>
+<footer>
+  <p>&copy; 2026 We Mental Health. Supporting Women in Sports, One Mind at a Time.</p>
+  <p style="margin-top: 6px;"><a href="privacy.html">Privacy Policy</a></p>
+</footer>
 
 <script>
-  // Script for tab navigation
-  function showTab(name){
-    // Update panels
-    document.querySelectorAll('.panel').forEach(function(p){
-      p.classList.toggle('active', p.id === 'panel-' + name);
-    });
-    // Update active state on buttons
-    document.querySelectorAll('.tab-btn').forEach(function(b){
-      b.classList.toggle('active', b.dataset.tab === name);
-    });
-    
-    // Update URL hash without jumping the page
-    history.replaceState(null, '', '#' + name);
-    
-    // Scroll to top of main content when changing tabs
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  // Add click events to tabs
-  document.querySelectorAll('.tab-btn').forEach(function(btn){
-    btn.addEventListener('click', function(){ showTab(btn.dataset.tab); });
+  // Top bar solidifies once scrolled past the hero
+  var topbar = document.getElementById('topbar');
+  window.addEventListener('scroll', function(){
+    topbar.classList.toggle('solid', window.scrollY > 80);
   });
 
-  // Support direct linking (e.g. index.html#about)
-  var initial = window.location.hash.replace('#','');
-  if (['home','about','mission','contact'].indexOf(initial) !== -1){
-    showTab(initial);
+  // Hamburger toggle
+  var menuToggle = document.getElementById('menu-toggle');
+  var navOverlay = document.getElementById('nav-overlay');
+
+  function closeMenu(){
+    navOverlay.classList.remove('open');
+    menuToggle.classList.remove('open');
   }
+  function toggleMenu(){
+    var isOpen = navOverlay.classList.toggle('open');
+    menuToggle.classList.toggle('open', isOpen);
+  }
+  menuToggle.addEventListener('click', toggleMenu);
+
+  // Same-page nav links close the menu and smooth-scroll
+  document.querySelectorAll('.nav-link').forEach(function(link){
+    link.addEventListener('click', function(e){
+      var targetId = link.getAttribute('href');
+      if (targetId.charAt(0) === '#'){
+        e.preventDefault();
+        closeMenu();
+        var target = document.querySelector(targetId === '#top' ? 'body' : targetId);
+        if (target){
+          window.scrollTo({ top: targetId === '#top' ? 0 : target.offsetTop - 76, behavior: 'smooth' });
+        }
+      }
+    });
+  });
+  // Links to other pages (Resources, Community, etc.) just close the menu on click, navigation proceeds normally
+  document.querySelectorAll('.nav-overlay a:not(.nav-link)').forEach(function(link){
+    link.addEventListener('click', closeMenu);
+  });
 </script>
 
-<!-- Google Translate Scripts -->
 <script type="text/javascript">
-  // 1. Auto-detect user's browser language and set the translation cookie
-  (function autoDetectLanguage() {
-    var cookieName = 'googtrans';
-    var hasCookie = document.cookie.split(';').some(function(item) {
-      return item.trim().startsWith(cookieName + '=');
-    });
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement(
+      { pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE },
+      'google_translate_element'
+    );
+  }
 
-    if (!hasCookie) {
-      var browserLang = (navigator.language || navigator.userLanguage || 'en').split('-')[0].toLowerCase();
-      
-      // If language is not English, set cookie and reload to translate
-      if (browserLang !== 'en') {
-        document.cookie = cookieName + '=/en/' + browserLang + '; path=/';
-        document.cookie = cookieName + '=/en/' + browserLang + '; path=/; domain=' + window.location.hostname;
-        window.location.reload(); 
-      }
+  function getCookie(name){
+    var match = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+    return match ? decodeURIComponent(match[1]) : null;
+  }
+
+  function setLanguage(lang){
+    var hostname = window.location.hostname;
+    document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + hostname;
+    if (lang !== 'en'){
+      document.cookie = 'googtrans=/en/' + lang + '; path=/';
+      document.cookie = 'googtrans=/en/' + lang + '; path=/; domain=' + hostname;
     }
+    try { localStorage.setItem('wmh_lang_decided', '1'); } catch (e) {}
+    location.reload();
+  }
+
+  document.getElementById('lang-select').addEventListener('change', function(){
+    setLanguage(this.value);
+  });
+
+  // Reflect current language in the dropdown
+  (function(){
+    var c = getCookie('googtrans');
+    var current = c ? c.split('/').pop() : 'en';
+    var select = document.getElementById('lang-select');
+    if (select) select.value = current || 'en';
   })();
 
-  
+  // Auto-detect browser language once per visitor, never overriding a manual choice
+  (function autoDetectLanguage(){
+    var alreadyDecided = false;
+    try { alreadyDecided = localStorage.getItem('wmh_lang_decided') === '1'; } catch (e) {}
+    if (alreadyDecided) return;
+
+    var browserLang = (navigator.language || navigator.userLanguage || 'en').split('-')[0].toLowerCase();
+    if (browserLang === 'en'){
+      try { localStorage.setItem('wmh_lang_decided', '1'); } catch (e) {}
+      return;
+    }
+    setLanguage(browserLang);
+  })();
+</script>
 <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<div id="google_translate_element"></div>
 
 </body>
 </html>
