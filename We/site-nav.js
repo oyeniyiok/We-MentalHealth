@@ -157,6 +157,51 @@
     document.body.appendChild(mount);
   }
 
+  /* --------------------------------------------------------------------
+     Translate injects its toolbar after this script runs and nudges <body>
+     down to clear it. site-nav.css hides every markup version we know of;
+     this removes the bar outright and undoes the offset, so a new version
+     with different class names still cannot show up at the top of the page.
+     Only Translate's own chrome is touched — never the translated text.
+     -------------------------------------------------------------------- */
+  (function hideTranslateBar() {
+    function strip() {
+      var bars = document.querySelectorAll(
+        'iframe.skiptranslate, .goog-te-banner-frame, #goog-gt-tt, .goog-te-balloon-frame'
+      );
+      for (var i = 0; i < bars.length; i++) {
+        if (bars[i].parentNode) bars[i].parentNode.removeChild(bars[i]);
+      }
+      if (document.body && document.body.style.top && document.body.style.top !== '0px') {
+        document.body.style.top = '0px';
+      }
+      if (document.documentElement.style.marginTop) {
+        document.documentElement.style.marginTop = '';
+      }
+    }
+
+    strip();
+
+    if (window.MutationObserver) {
+      var observer = new MutationObserver(strip);
+      observer.observe(document.documentElement, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['style', 'class']
+      });
+      /* Translate settles within a few seconds; stop watching after that
+         so we are not observing the whole document for the page's life. */
+      setTimeout(function () { observer.disconnect(); strip(); }, 8000);
+    } else {
+      var ticks = 0;
+      var timer = setInterval(function () {
+        strip();
+        if (++ticks > 40) clearInterval(timer);
+      }, 200);
+    }
+  })();
+
   function getCookie(name) {
     var match = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
     return match ? decodeURIComponent(match[1]) : null;
