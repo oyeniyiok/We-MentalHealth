@@ -180,10 +180,54 @@
 }
 .nav-lang select option{ color: var(--ink); }
 
-/* ---------- Google Translate chrome ---------- */
+/* ---------- Google Translate chrome ----------
+   Translate ships a toolbar it pins to the top of the page, then pushes the
+   body down to make room. It has had several markup versions over the years
+   and a page can get any of them, so every variant is hidden here. Hiding the
+   toolbar does not affect the translation itself. */
+
+/* Our own hidden mount point */
 #google_translate_element{ display: none !important; }
-.goog-te-banner-frame{ display: none !important; }
-body{ top: 0 !important; }
+
+/* The toolbar, old and new. .skiptranslate is the wrapper Translate puts on
+   its own UI so it does not translate itself — on the banner it is the bar,
+   so hide the iframe forms of it but never the plain <div> the widget also
+   uses for the page body wrapper. */
+.goog-te-banner-frame,
+.goog-te-banner-frame.skiptranslate,
+iframe.skiptranslate,
+.goog-te-banner{
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+}
+
+/* Current widget's toolbar + its loading progress bar */
+.VIpgJd-ZVi9od-ORHb-OEVmcd,
+.VIpgJd-ZVi9od-aZ2wEe-wOHMyf,
+.VIpgJd-ZVi9od-aZ2wEe-OiiCO{
+  display: none !important;
+}
+
+/* Translate sets an inline top offset on <body> to clear its bar */
+body{
+  top: 0 !important;
+  position: static !important;
+  min-height: 0 !important;
+}
+
+/* The hover balloon and the highlight it paints over translated words */
+#goog-gt-tt,
+.goog-te-balloon-frame,
+.goog-tooltip,
+.goog-tooltip:hover{
+  display: none !important;
+}
+.goog-text-highlight,
+font[style]{
+  background: none !important;
+  box-shadow: none !important;
+}
 
 /* ---------- Resource pages sit below the fixed bar ---------- */
 body.has-topbar main{
