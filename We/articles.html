@@ -133,6 +133,58 @@
   }
   .button:hover{ background: var(--plum-deep); transform: translateY(-1px); }
 
+  /* Further reading — links out to the blog. Not an accordion, because these
+     open somewhere else rather than expanding in place. */
+  .blogroll{
+    background: white;
+    border: 1px solid #f1e4ea;
+    border-left: 4px solid var(--rose-gold);
+    border-radius: 18px;
+    padding: 28px clamp(20px, 3vw, 32px);
+    margin: 30px 0 10px;
+    box-shadow: 0 8px 24px rgba(106,76,147,0.07);
+  }
+  .blogroll-eyebrow{
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--rose-gold);
+    margin-bottom: 10px;
+  }
+  .blogroll h2{
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    color: var(--plum);
+    font-size: 1.4rem;
+    margin: 0 0 10px;
+  }
+  .blogroll > p{ color: var(--ink-soft); margin: 0 0 18px; max-width: 60ch; }
+  .blogroll-list{ list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+  .blogroll-list a{
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 14px;
+    text-decoration: none;
+    color: var(--ink);
+    background: var(--blush-soft);
+    border-radius: 12px;
+    padding: 13px 16px;
+    font-weight: 700;
+    font-size: 0.96rem;
+    transition: background 0.18s ease, transform 0.18s ease;
+  }
+  .blogroll-list a:hover{ background: var(--blush); transform: translateX(3px); }
+  .blogroll-list .date{
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--ink-soft);
+    white-space: nowrap;
+  }
+  .blogroll .ext-note{ font-size: 0.82rem; color: var(--ink-soft); margin: 16px 0 0; }
+
   footer{
     background: var(--plum);
     color: rgba(255,255,255,0.85);
@@ -253,6 +305,49 @@
           </p>
         </div>
       </div>
+    </div>
+
+    <div class="blogroll">
+      <span class="blogroll-eyebrow">Further reading</span>
+      <h2> Check out the blog</h2>
+      <p>
+        Longer, more personal writing on sex education, motherhood, violence
+        against women, and what women face in sport. Published on Blogger, so
+        these open in a new tab.
+      </p>
+      <ul class="blogroll-list">
+        <li>
+          <a href="https://oyeniyiok.blogspot.com/2022/07/sex-education-sexeducation-is.html" target="_blank" rel="noopener">
+            Sex Education <span class="date">July 2022</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://oyeniyiok.blogspot.com/2022/03/motherhood-who-is-mother-meaning-of.html" target="_blank" rel="noopener">
+            Motherhood <span class="date">March 2022</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://oyeniyiok.blogspot.com/2021/06/challenges-faced-by-feminine-in-sport.html" target="_blank" rel="noopener">
+            Challenges Faced by Feminine in Sport <span class="date">June 2021</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://oyeniyiok.blogspot.com/2020/12/violence-against-women.html" target="_blank" rel="noopener">
+            Violence Against Women <span class="date">December 2020</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://oyeniyiok.blogspot.com/2020/04/every-woman-is-goddess-not-slave.html" target="_blank" rel="noopener">
+            Every Woman Is a Goddess Not a Slave <span class="date">April 2020</span>
+          </a>
+        </li>
+      </ul>
+      <p class="ext-note">
+        Blogger is a separate service with its own privacy practices, and
+        comments there are public. Nothing you read or post on the blog is
+        covered by our <a href="privacy.html">privacy policy</a>.
+      </p>
+      <a class="button" href="https://oyeniyiok.blogspot.com/" target="_blank" rel="noopener">Read all posts →</a>
     </div>
 
     <a href="index.html" class="button">← Back to Home</a>
