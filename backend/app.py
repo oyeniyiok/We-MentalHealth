@@ -46,6 +46,7 @@ ALLOWED_TOPICS = {
     "Depression",
     "Personal / family issues",
     "Career decisions",
+    "Injury / recovery",
 }
 
 MAX_DETAILS_LEN = 4000
