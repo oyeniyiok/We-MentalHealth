@@ -1,9 +1,11 @@
-User-agent: *
+﻿User-agent: *
 Allow: /
 
 # Keep the admin surface out of search results
 Disallow: /admin
 Disallow: /api/
 
-Sitemap: https://wementalhealth.duckdns.org/sitemap.xml
+Sitemap: https://we-mentalhealth.org/sitemap.xml
+
+
 
