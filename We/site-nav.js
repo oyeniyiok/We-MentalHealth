@@ -1,8 +1,10 @@
 /* ==========================================================================
    We Mental Health — shared site navigation behaviour
-   Load this as a NORMAL script (no defer) at the end of <body>, BEFORE the
-   Google Translate element.js tag — element.js calls googleTranslateElementInit
-   the moment it loads, so that function has to already exist.
+   Load this as a NORMAL script (no defer) at the end of <body>.
+
+   Google Translate is NOT loaded by the pages. This file injects it, and only
+   for a visitor who has picked a non-English language from the menu — see the
+   bottom of the file.
    ========================================================================== */
 (function () {
   'use strict';
@@ -150,11 +152,21 @@
     );
   };
 
-  /* The widget needs a mount point on every page; create it if absent */
-  if (!document.getElementById('google_translate_element')) {
-    var mount = document.createElement('div');
-    mount.id = 'google_translate_element';
-    document.body.appendChild(mount);
+  /* Translate is loaded on demand only — see the bottom of this file. Nothing
+     above this point contacts Google. */
+  function loadTranslate() {
+    if (document.getElementById('wmh-translate-script')) return;
+
+    if (!document.getElementById('google_translate_element')) {
+      var mount = document.createElement('div');
+      mount.id = 'google_translate_element';
+      document.body.appendChild(mount);
+    }
+
+    var s = document.createElement('script');
+    s.id = 'wmh-translate-script';
+    s.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+    document.body.appendChild(s);
   }
 
   /* --------------------------------------------------------------------
@@ -215,32 +227,34 @@
       document.cookie = 'googtrans=/en/' + lang + '; path=/';
       document.cookie = 'googtrans=/en/' + lang + '; path=/; domain=' + hostname;
     }
-    try { localStorage.setItem('wmh_lang_decided', '1'); } catch (e) {}
+    /* Choosing English clears the cookie above, so the reload comes back with
+       no Translate script at all. */
     location.reload();
   }
 
+  var chosen = getCookie('googtrans');
+  chosen = chosen ? chosen.split('/').pop() : 'en';
+  if (SUPPORTED.indexOf(chosen) === -1) chosen = 'en';
+
   var select = document.getElementById('lang-select');
   if (select) {
-    var current = getCookie('googtrans');
-    current = current ? current.split('/').pop() : 'en';
-    select.value = SUPPORTED.indexOf(current) !== -1 ? current : 'en';
+    select.value = chosen;
     select.addEventListener('change', function () { setLanguage(this.value); });
   }
 
-  /* Auto-detect once per visitor, never overriding a manual choice, and only
-     into a language the picker can represent. */
-  (function autoDetect() {
-    var decided = false;
-    try { decided = localStorage.getItem('wmh_lang_decided') === '1'; } catch (e) {}
-    if (decided || getCookie('googtrans')) return;
+  /* ----------------------------------------------------------------------
+     The only point at which Google is contacted.
 
-    var browserLang = (navigator.language || navigator.userLanguage || 'en')
-      .split('-')[0].toLowerCase();
+     Translate is a third party: loading it sends the visitor's IP address and
+     page content to Google. So it runs only for someone who has actively asked
+     for another language from the menu — choosing a language IS the consent.
+     An English reader never touches Google at all, which is why this site needs
+     no cookie banner. Switching back to English clears the cookie and stops it.
 
-    if (browserLang === 'en' || SUPPORTED.indexOf(browserLang) === -1) {
-      try { localStorage.setItem('wmh_lang_decided', '1'); } catch (e) {}
-      return;
-    }
-    setLanguage(browserLang);
-  })();
+     There is deliberately no browser-language auto-detection: that would
+     contact Google before anyone had agreed to it.
+     ---------------------------------------------------------------------- */
+  if (chosen !== 'en') {
+    loadTranslate();
+  }
 })();
